@@ -24,10 +24,10 @@ class _HomeWrapperState extends State<HomeWrapper> {
     return Scaffold(
       body: Stack(
         children: [
-          /// 🔹 Drawer
+          ///  Drawer
           AppDrawer(onMenuTap: toggleDrawer),
 
-          /// 🔹 Main Page (Slides)
+          ///  Main Page (Slides)
           AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             transform: Matrix4.translationValues(

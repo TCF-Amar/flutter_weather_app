@@ -20,28 +20,42 @@ class SearchScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            /// 🔹 Search Field
-            Obx(
-              () => TextFormField(
-                controller: queryController,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: 'Search',
-                  hintText: 'Search city name',
-                  prefixIcon: const Icon(Icons.search),
-                  suffixIcon: controller.currentQuery.isNotEmpty
-                      ? IconButton(
-                          icon: const Icon(Icons.clear, color: Colors.grey),
-                          onPressed: () {
-                            queryController.clear();
-                            controller.currentQuery = '';
-                          },
-                        )
-                      : null,
+            ///  Search Field
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+
+              ),
+              child: Obx(
+                () => TextFormField(
+                  controller: queryController,
+                  style: const TextStyle(fontSize: 16, color: Colors.black),
+
+                  decoration: InputDecoration(
+                    /// border transparent
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+
+                    labelText: 'Search',
+                    hintText: 'Search city name',
+                    prefixIcon: const Icon(Icons.search),
+
+                    suffixIcon: controller.currentQuery.isNotEmpty
+                        ? IconButton(
+                            icon: const Icon(Icons.clear, color: Colors.grey),
+                            onPressed: () {
+                              queryController.clear();
+                              controller.currentQuery = '';
+                            },
+                          )
+                        : null,
+                  ),
+                  onChanged: (value) {
+                    controller.currentQuery = value;
+                  },
                 ),
-                onChanged: (value) {
-                  controller.currentQuery = value;
-                },
               ),
             ),
 
