@@ -62,6 +62,36 @@ class NewsScreen extends StatelessWidget {
                     text: news.description,
                     fontSize: 16,
                     color: Colors.black87,
+                    maxLines: 10,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppText(text: "News", fontSize: 16, color: Colors.grey),
+                        const SizedBox(width: 10),
+                        Row(
+                          children: [
+                            Icon(Icons.share, size: 20, color: Colors.grey),
+                            const SizedBox(width: 10),
+                            AppText(
+                              text: "Share it",
+                              fontSize: 16,
+                              color: Colors.grey,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

@@ -140,7 +140,7 @@ class _WeatherView extends StatelessWidget {
     title:
         'New Visual Standards Set by Striking Portrait Emphasizing the Power of Focal Points',
     description:
-        'A striking portrait has gained attention for redefining modern visual standards by highlighting the importance of focal points in imagery...',
+        'In a bold new visual release that is rapidly gaining attention across creative circles, a striking close-up portrait has emerged as a textbook example of how the focal point can transform an image’s impact. The image places the subject’s eyes and facial features at the heart of the frame, drawing the viewer’s attention instantly to the most expressive elements of the composition. This technique—long underscored by photography and design experts as the key to compelling visuals—makes use of sharp focus, contrast, and natural lighting to guide the viewer’s gaze to precisely where the creator intends. Experts say this approach aligns perfectly with fundamental principles of visual hierarchy and image composition, where a clear focal point not only captivates but also tells a nuanced story about the subject and mood.',
     imageUrl:
         'https://ix-marketing.imgix.net/focalpoint.png?auto=format,compress&w=1946',
     author: 'John Doe',
