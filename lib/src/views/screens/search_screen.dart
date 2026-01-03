@@ -20,7 +20,7 @@ class SearchScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            /// 🔹 Search Field
+            ///  Search Field
             Obx(
               () => TextFormField(
                 controller: queryController,

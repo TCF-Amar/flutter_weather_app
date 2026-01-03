@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/services/api/weather_api.dart';
+import 'package:weather_app/src/controllers/details_controller.dart';
 import 'package:weather_app/src/controllers/saved_locations_controller.dart';
 import 'package:weather_app/src/models/place_model.dart';
 import 'package:weather_app/src/models/weather_model.dart';
@@ -25,11 +26,12 @@ class _DetailsScreenState extends State<DetailsScreen>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
   final SavedLocationsController savedPlaceController = Get.find();
+  final DetailsController detailsController = Get.put(DetailsController());
+
+
 
   // Local state for this screen only (doesn't affect home screen)
-  final Rx<WeatherModel?> weather = Rx<WeatherModel?>(null);
-  final RxBool isLoading = false.obs;
-  final RxString error = ''.obs;
+
 
   @override
   void initState() {
@@ -38,46 +40,11 @@ class _DetailsScreenState extends State<DetailsScreen>
 
     /// Schedule weather loading after build
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _loadWeather();
+      detailsController.loadWeather(widget.place);
     });
   }
 
   /// Load weather data for the specific place
-  Future<void> _loadWeather() async {
-    isLoading.value = true;
-    error.value = '';
-
-    try {
-      final result = await WeatherApi.fetchWeather(
-        lat: widget.place.lat,
-        lon: widget.place.lon,
-      );
-
-      result.fold(
-        (failure) {
-          error.value = failure.message;
-          weather.value = null;
-        },
-        (data) {
-          // Attach the place to the weather model
-          weather.value = WeatherModel(
-            currentUnits: data.currentUnits,
-            current: data.current,
-            hourlyUnits: data.hourlyUnits,
-            hourly: data.hourly,
-            dailyUnits: data.dailyUnits,
-            daily: data.daily,
-            place: widget.place,
-          );
-        },
-      );
-    } catch (e) {
-      error.value = 'Unexpected error: $e';
-      weather.value = null;
-    } finally {
-      isLoading.value = false;
-    }
-  }
 
   @override
   void dispose() {
@@ -86,47 +53,35 @@ class _DetailsScreenState extends State<DetailsScreen>
   }
 
   /// 🔹 Get 24 hourly indexes for a specific day
-  List<int> _getHourlyIndexesByDay(DateTime day, WeatherModel weather) {
-    final target = DateTime(day.year, day.month, day.day);
-    final times = weather.hourly.time;
-
-    if (times.isEmpty) {
-      return [];
-    }
-
-    final List<int> indexes = [];
-
-    for (int i = 0; i < times.length; i++) {
-      try {
-        final t = DateTime.parse(times[i]);
-        if (t.year == target.year &&
-            t.month == target.month &&
-            t.day == target.day) {
-          indexes.add(i);
-        }
-      } catch (e) {
-        /// Skip invalid date strings
-        continue;
-      }
-    }
-
-    return indexes.take(24).toList();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final isLoadingValue = isLoading.value;
-      final weatherValue = weather.value;
-      final errorValue = error.value;
+      final isLoadingValue = detailsController.isLoading.value;
+      final weatherValue = detailsController.weather.value;
+      final errorValue = detailsController.error.value;
 
       if (isLoadingValue || weatherValue == null) {
-        return Scaffold(body: const Center(child: CircularProgressIndicator()));
-      }
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Loading'),
+            centerTitle: true,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new),
+              
+
+              onPressed: () {
+                context.pop();
+              },
+            ),
+          ),
+          body: const Center(child: CircularProgressIndicator()),
+        );
+      } 
 
       if (errorValue.isNotEmpty) {
         return Scaffold(
-          appBar: AppBar(title: Text(widget.place.name)),
+          appBar: AppBar(title: Text('Error')),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -140,7 +95,9 @@ class _DetailsScreenState extends State<DetailsScreen>
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: _loadWeather,
+                  onPressed: (){
+                    detailsController.loadWeather(widget.place);
+                  },
                   child: const Text('Retry'),
                 ),
               ],
@@ -304,7 +261,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                           /// Yesterday
                           _HourlyTab(
                             weather: weatherValue,
-                            indexes: _getHourlyIndexesByDay(
+                            indexes: detailsController.getHourlyIndexesByDay(
                               DateTime.now().subtract(const Duration(days: 1)),
                               weatherValue,
                             ),
@@ -313,7 +270,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                           /// Today
                           _HourlyTab(
                             weather: weatherValue,
-                            indexes: _getHourlyIndexesByDay(
+                            indexes: detailsController.getHourlyIndexesByDay(
                               DateTime.now(),
                               weatherValue,
                             ),
@@ -322,7 +279,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                           /// Tomorrow
                           _HourlyTab(
                             weather: weatherValue,
-                            indexes: _getHourlyIndexesByDay(
+                            indexes: detailsController.getHourlyIndexesByDay(
                               DateTime.now().add(const Duration(days: 1)),
                               weatherValue,
                             ),

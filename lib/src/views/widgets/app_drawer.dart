@@ -46,9 +46,7 @@ class AppDrawer extends StatelessWidget {
 
                 GestureDetector(
                   onTap: () {
-                    if (Scaffold.of(context).isDrawerOpen) {
-                      Scaffold.of(context).closeDrawer();
-                    }
+                    onMenuTap();
                   },
                   child: Row(
                     children: [
@@ -74,9 +72,7 @@ class AppDrawer extends StatelessWidget {
                 /// Add location
                 GestureDetector(
                   onTap: () {
-                    if (Scaffold.of(context).isDrawerOpen) {
-                      Scaffold.of(context).closeDrawer();
-                    }
+                    onMenuTap();
                     Future.delayed(const Duration(milliseconds: 100), () {
                       context.pushNamed(
                         RouteName.search.name,
@@ -146,9 +142,7 @@ class AppDrawer extends StatelessWidget {
                   context,
                   title: 'Settings',
                   onTap: () {
-                    if (Scaffold.of(context).isDrawerOpen) {
-                      Scaffold.of(context).closeDrawer();
-                    }
+                    onMenuTap();
                   },
                 ),
                 const SizedBox(height: 16),
@@ -156,9 +150,7 @@ class AppDrawer extends StatelessWidget {
                   context,
                   title: 'Share this app',
                   onTap: () {
-                    if (Scaffold.of(context).isDrawerOpen) {
-                      Scaffold.of(context).closeDrawer();
-                    }
+                    onMenuTap();
                   },
                 ),
                 const SizedBox(height: 16),
@@ -166,9 +158,7 @@ class AppDrawer extends StatelessWidget {
                   context,
                   title: 'Rate this app',
                   onTap: () {
-                    if (Scaffold.of(context).isDrawerOpen) {
-                      Scaffold.of(context).closeDrawer();
-                    }
+                    onMenuTap();
                   },
                 ),
 

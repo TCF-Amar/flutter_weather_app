@@ -54,7 +54,7 @@ class AnimatedText extends StatelessWidget {
           );
         }
 
-        // ✅ Fixed: Wrap Marquee in SizedBox with fixed height
+        //  Fixed: Wrap Marquee in SizedBox with fixed height
         return SizedBox(
           height: fontSize * 1.5, // Height based on font size
           child: Marquee(
