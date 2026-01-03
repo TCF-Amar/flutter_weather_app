@@ -16,13 +16,13 @@ class WeeklyList extends StatelessWidget {
       final todayDate = DateTime(today.year, today.month, today.day);
       final dateOnly = DateTime(parsedDate.year, parsedDate.month, parsedDate.day);
       
-      if (dateOnly == todayDate) {
-        return 'Today';
-      } else if (dateOnly == todayDate.add(const Duration(days: 1))) {
-        return 'Tomorrow';
-      } else {
+      // if (dateOnly == todayDate) {
+      //   return 'Today';
+      // } else if (dateOnly == todayDate.add(const Duration(days: 1))) {
+      //   return 'Tomorrow';
+      // } else {
         return DateFormat('EEEE').format(parsedDate);
-      }
+      // }
     } catch (e) {
       return DateFormat('EEEE').format(DateTime.parse(date));
     }
@@ -50,6 +50,7 @@ class WeeklyList extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       itemCount: indexes.length,
       separatorBuilder: (_, __) => const SizedBox(height: 12),
       itemBuilder: (context, i) {
@@ -66,13 +67,23 @@ class WeeklyList extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
-            color: Colors.grey.shade50,
+            // color: Colors.grey.shade50,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.grey.shade200, width: 1),
+            // border: Border.all(color: Colors.grey.shade200, width: 1),
           ),
           child: Row(
             children: [
-              /// 🔹 Day + Date
+
+              ///  Icon
+              Center(
+                  child: Icon(
+                    WeatherIconMapper.getIcon(daily.weatherCode[index]),
+                    size: 32,
+                    color: Colors.orangeAccent,
+                  ),
+
+              ), SizedBox(width: 10,),
+              ///  Day + Date
               Expanded(
                 flex: 3,
                 child: Column(
@@ -93,19 +104,9 @@ class WeeklyList extends StatelessWidget {
                 ),
               ),
 
-              /// 🔹 Icon
-              Expanded(
-                flex: 2,
-                child: Center(
-                  child: Icon(
-                    WeatherIconMapper.getIcon(daily.weatherCode[index]),
-                    size: 32,
-                    color: Colors.orangeAccent,
-                  ),
-                ),
-              ),
 
-              /// 🔹 Temp + Rain probability
+
+              ///  Temp + Rain probability
               Expanded(
                 flex: 3,
                 child: Column(

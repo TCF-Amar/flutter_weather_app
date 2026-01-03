@@ -93,7 +93,7 @@ class SunConditionCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /// 🔹 Header row
+                ///  Header row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

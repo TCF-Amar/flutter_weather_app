@@ -12,6 +12,7 @@ import 'package:weather_app/src/views/widgets/app_scaffold.dart';
 import 'package:weather_app/src/views/widgets/cards/hourly_card.dart';
 import 'package:weather_app/src/views/widgets/cards/main_card.dart';
 import 'package:weather_app/src/views/widgets/cards/news_container.dart';
+import 'package:weather_app/src/views/widgets/cards/seven_day_forecast.dart';
 import 'package:weather_app/src/views/widgets/cards/sun_condition_card.dart';
 import 'package:weather_app/src/views/widgets/cards/weekly_forecast_card.dart';
 import 'package:weather_app/src/views/widgets/cards/wind_card.dart';
@@ -186,6 +187,7 @@ class _WeatherView extends StatelessWidget {
             MainCard(weather: weather),
             HourlyForecastCard(weather: weather),
             WeeklyForecastCard(weather: weather),
+            // SevenDayForecast(weather: weather),
             SunConditionCard(weather: weather),
             WindPressureCard(
               windSpeed: weather.current.windSpeed,
