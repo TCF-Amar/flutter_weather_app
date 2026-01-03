@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/core/DI/initialize_dependency.dart';
+import 'package:weather_app/core/storage/local_storage.dart';
+import 'package:weather_app/core/storage/shared_prefs_storage.dart';
 import 'package:weather_app/services/routes/app_route.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -12,7 +16,12 @@ void main() async {
     debugPrint('Warning: Could not load .env.development file: $e');
   }
 
-InitializeDependency().dependencies();
+  // Initialize SharedPreferences first
+  final prefs = await SharedPreferences.getInstance();
+  Get.put<LocalStorage>(SharedPrefsStorage(prefs), permanent: true);
+
+  // Initialize other dependencies
+  InitializeDependency().dependencies();
 
   runApp(const MainApp());
 }

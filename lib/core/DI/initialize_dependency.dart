@@ -8,11 +8,12 @@ import 'package:weather_app/src/controllers/location_controller.dart';
 class InitializeDependency extends Bindings {
   @override
   void dependencies() {
+    // LocalStorage is already initialized in main.dart
+    // Initialize controllers
     Get.put(LocationController(), permanent: true);
     Get.put(PlaceController(), permanent: true);
     Get.put(WeatherController(), permanent: true);
     Get.put(WeatherSearchController(), permanent: true);
     Get.put(SavedLocationsController(), permanent: true);
-    // Get.put(Loca(), permanent: true);
   }
 }

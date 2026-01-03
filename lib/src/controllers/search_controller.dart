@@ -10,7 +10,7 @@ class WeatherSearchController extends GetxController {
   ///  Search result list
   final RxList<PlaceModel> places = <PlaceModel>[].obs;
 
-  final LocalStorage storage = Get.put(LocalStorage());
+  final LocalStorage storage = Get.find();
 
   ///  Search text
   final RxString query = ''.obs;

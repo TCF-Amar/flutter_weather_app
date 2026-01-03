@@ -9,7 +9,7 @@ import 'package:weather_app/src/views/widgets/app_text.dart';
 import 'package:weather_app/src/views/widgets/saved_locatio_tile.dart';
 
 class AppDrawer extends StatelessWidget {
-    final VoidCallback onMenuTap;
+  final VoidCallback onMenuTap;
 
   AppDrawer({super.key, required this.onMenuTap});
 
@@ -110,6 +110,7 @@ class AppDrawer extends StatelessWidget {
 
                 /// Saved locations list
                 Expanded(
+                  flex: 3,
                   child: Obx(() {
                     if (savedLocationsController.isLoading.value) {
                       return const Center(
