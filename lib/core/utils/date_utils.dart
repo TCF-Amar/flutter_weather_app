@@ -10,9 +10,9 @@ class DateTimeHelper {
 
   /// ───────── DATE FORMATS ─────────
 
-  /// 2 January 2026
+  /// January 2, 2026
   static String formatDate(String value) {
-    return DateFormat('d MMMM yyyy').format(_parse(value));
+    return DateFormat('MMMM, d, yyyy').format(_parse(value));
   }
 
   /// Friday
@@ -20,14 +20,14 @@ class DateTimeHelper {
     return DateFormat('EEEE').format(_parse(value));
   }
 
-  /// 2 Jan
+  /// Jan 2
   static String formatShortDate(String value) {
-    return DateFormat('d MMM').format(_parse(value));
+    return DateFormat('MMM d').format(_parse(value));
   }
 
   /// ───────── TIME FORMATS ─────────
 
-  /// 2:00 PM  ← (2026-01-02T14:00)
+  ///   2:00 PM  ← (2026-01-02T14:00)
   static String formatTime(String value) {
     return DateFormat.jm().format(_parse(value));
   }
@@ -39,9 +39,9 @@ class DateTimeHelper {
 
   /// ───────── DATE + TIME ─────────
 
-  /// 2 Jan 2026 • 2:00 PM
+  /// January 2, 2026 • 2:00 PM
   static String formatDateTime(String value) {
-    return DateFormat('d MMM yyyy • h:mm a').format(_parse(value));
+    return DateFormat('MMM d, yyyy • h:mm a').format(_parse(value));
   }
 
   /// ───────── LOGIC HELPERS ─────────

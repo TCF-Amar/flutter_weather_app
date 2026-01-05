@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
@@ -7,10 +7,6 @@ class SunConditionCard extends StatelessWidget {
   final WeatherModel weather;
 
   const SunConditionCard({super.key, required this.weather});
-
-  String _formatTime(String time) {
-    return DateFormat.jm().format(DateTime.parse(time));
-  }
 
   int _getTodayIndex(List<String> dates) {
     final now = DateTime.now();
@@ -74,7 +70,6 @@ class SunConditionCard extends StatelessWidget {
             fontSize: 20,
             bold: true,
             color: Colors.black,
-            
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
@@ -100,12 +95,16 @@ class SunConditionCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
-                        AppText(text: 'Conditions', fontSize: 12, color: Colors.grey),
+                        AppText(
+                          text: 'Conditions',
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
                         SizedBox(height: 4),
                         AppText(text: 'Sun', fontSize: 16, bold: true),
                       ],
                     ),
-          
+
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -124,9 +123,9 @@ class SunConditionCard extends StatelessWidget {
                     ),
                   ],
                 ),
-          
+
                 const SizedBox(height: 24),
-          
+
                 /// 🔹 Sun path
                 SizedBox(
                   height: 30,
@@ -135,17 +134,17 @@ class SunConditionCard extends StatelessWidget {
                       final sunProgress = _getSunProgress(sunrise, sunset);
                       const sunIconSize = 22.0;
                       const sunIconHalfSize = sunIconSize / 2;
-          
+
                       // Calculate sun position from left (0.0) to right (1.0)
                       final maxWidth = constraints.maxWidth;
                       final sunCenterX = sunProgress * maxWidth;
-          
+
                       // Clamp to keep icon within bounds
                       final clampedX = sunCenterX.clamp(
                         sunIconHalfSize,
                         maxWidth - sunIconHalfSize,
                       );
-          
+
                       return Stack(
                         children: [
                           // Base line
@@ -153,10 +152,7 @@ class SunConditionCard extends StatelessWidget {
                             bottom: 0,
                             left: 0,
                             right: 0,
-                            child: Container(
-                              height: 2,
-                              color: Colors.indigo,
-                            ),
+                            child: Container(height: 2, color: Colors.indigo),
                           ),
                           // Sun icon - positioned dynamically
                           Positioned(
@@ -173,20 +169,20 @@ class SunConditionCard extends StatelessWidget {
                     },
                   ),
                 ),
-          
+
                 const SizedBox(height: 12),
-          
+
                 /// 🔹 Sunrise / Sunset
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AppText(
-                      text: _formatTime(sunrise),
+                      text: DateTimeHelper.formatTime(sunrise),
                       fontSize: 12,
                       color: Colors.grey,
                     ),
                     AppText(
-                      text: _formatTime(sunset),
+                      text: DateTimeHelper.formatTime(sunset),
                       fontSize: 12,
                       color: Colors.grey,
                     ),

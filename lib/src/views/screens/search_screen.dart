@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/src/controllers/search_controller.dart';
 import 'package:weather_app/src/views/widgets/app_scaffold.dart';
-import 'package:weather_app/src/views/widgets/search_result_tile.dart';
+import 'package:weather_app/src/views/widgets/tiles/search_result_tile.dart';
 
 class SearchScreen extends StatelessWidget {
   final String? title;
@@ -25,7 +25,6 @@ class SearchScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
-
               ),
               child: Obx(
                 () => TextFormField(

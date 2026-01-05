@@ -3,11 +3,17 @@ import 'package:weather_app/services/api/weather_api.dart';
 import 'package:weather_app/src/models/place_model.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 
+/// Controller for the details screen
+/// Manages weather data for a specific location
 class DetailsController extends GetxController {
-
+  // ─────────── State Variables ───────────
   final Rx<WeatherModel?> weather = Rx<WeatherModel?>(null);
   final RxBool isLoading = false.obs;
   final RxString error = ''.obs;
+
+  // ─────────── Public Methods ───────────
+
+  /// Load weather data for a specific place
   Future<void> loadWeather(PlaceModel place) async {
     isLoading.value = true;
     error.value = '';
@@ -19,11 +25,11 @@ class DetailsController extends GetxController {
       );
 
       result.fold(
-            (failure) {
+        (failure) {
           error.value = failure.message;
           weather.value = null;
         },
-            (data) {
+        (data) {
           // Attach the place to the weather model
           weather.value = WeatherModel(
             currentUnits: data.currentUnits,
@@ -44,6 +50,8 @@ class DetailsController extends GetxController {
     }
   }
 
+  /// Get hourly weather indexes for a specific day
+  /// Returns up to 24 hourly indexes for the given day
   List<int> getHourlyIndexesByDay(DateTime day, WeatherModel weather) {
     final target = DateTime(day.year, day.month, day.day);
     final times = weather.hourly.time;
@@ -70,7 +78,4 @@ class DetailsController extends GetxController {
 
     return indexes.take(24).toList();
   }
-
-
-
 }

@@ -3,17 +3,23 @@ import 'package:get/get.dart';
 import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/controllers/location_controller.dart';
 
+/// Controller for the splash screen
+/// Handles app initialization and navigation to home screen
 class SplashController extends GetxController {
+  // ─────────── Dependencies ───────────
   final locationController = Get.find<LocationController>();
 
+  // ─────────── State Variables ───────────
   final RxBool isInitialized = false.obs;
   final RxString statusMessage = 'Loading...'.obs;
 
-  /// Timer
-  Timer? _timer;
-
   /// Navigation callback
   Function(String)? onNavigate;
+
+  /// Timer for initialization
+  Timer? _timer;
+
+  // ─────────── Lifecycle ───────────
 
   @override
   void onInit() {
@@ -21,6 +27,15 @@ class SplashController extends GetxController {
     _initializeApp();
   }
 
+  @override
+  void onClose() {
+    _timer?.cancel();
+    super.onClose();
+  }
+
+  // ─────────── Private Methods ───────────
+
+  /// Initialize the app and wait for location services
   Future<void> _initializeApp() async {
     /// Update status
     statusMessage.value = 'Initializing app...';
@@ -28,9 +43,8 @@ class SplashController extends GetxController {
     /// Wait for minimum splash duration (1 second)
     await Future.delayed(const Duration(seconds: 1));
 
-    /// Check if location is ready
+    /// Wait for location to finish initializing
     try {
-      /// Wait for location to finish initializing 
       int waitCount = 0;
       while (locationController.status.value == LocationStatus.loading &&
           waitCount < 20) {
@@ -48,16 +62,9 @@ class SplashController extends GetxController {
     isInitialized.value = true;
     statusMessage.value = 'Ready!';
 
-    // Navigate to home via callback
+    /// Navigate to home via callback
     if (onNavigate != null) {
       onNavigate!(RouteName.home.path);
     }
-  }
-
-  /// Dispose timer
-  @override
-  void onClose() {
-    _timer?.cancel();
-    super.onClose();
   }
 }

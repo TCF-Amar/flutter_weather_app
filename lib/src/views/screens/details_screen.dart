@@ -9,8 +9,9 @@ import 'package:weather_app/src/models/place_model.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/animated_text.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
-import 'package:weather_app/src/views/widgets/derails_section.dart';
-import 'package:weather_app/src/views/widgets/hourly_hours_row.dart';
+import 'package:weather_app/src/views/widgets/details_section.dart';
+import 'package:weather_app/src/views/widgets/lists/hourly_hours_row.dart';
+import 'package:weather_app/src/views/widgets/share_options_sheet.dart';
 
 class DetailsScreen extends StatefulWidget {
   final PlaceModel place;
@@ -27,10 +28,7 @@ class _DetailsScreenState extends State<DetailsScreen>
   final SavedLocationsController savedPlaceController = Get.find();
   final DetailsController detailsController = Get.put(DetailsController());
 
-
-
   // Local state for this screen only (doesn't affect home screen)
-
 
   @override
   void initState() {
@@ -51,6 +49,16 @@ class _DetailsScreenState extends State<DetailsScreen>
     super.dispose();
   }
 
+  /// Show share options bottom sheet
+  void _showShareOptions(BuildContext context, WeatherModel weather) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) =>
+          ShareOptionsSheet(weather: weather, place: widget.place),
+    );
+  }
+
   /// 🔹 Get 24 hourly indexes for a specific day
 
   @override
@@ -67,7 +75,6 @@ class _DetailsScreenState extends State<DetailsScreen>
             centerTitle: true,
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new),
-              
 
               onPressed: () {
                 context.pop();
@@ -76,7 +83,7 @@ class _DetailsScreenState extends State<DetailsScreen>
           ),
           body: const Center(child: CircularProgressIndicator()),
         );
-      } 
+      }
 
       if (errorValue.isNotEmpty) {
         return Scaffold(
@@ -94,7 +101,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: (){
+                  onPressed: () {
                     detailsController.loadWeather(widget.place);
                   },
                   child: const Text('Retry'),
@@ -181,6 +188,11 @@ class _DetailsScreenState extends State<DetailsScreen>
                                     ),
                                   );
                           }),
+                          IconButton(
+                            onPressed: () =>
+                                _showShareOptions(context, weatherValue),
+                            icon: const Icon(Icons.share, color: Colors.white),
+                          ),
                         ],
                       ),
                     ),

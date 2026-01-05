@@ -34,7 +34,7 @@ class MainCard extends StatelessWidget {
             begin: Alignment.centerLeft,
             colors: [
               Color.fromARGB(255, 0, 140, 255),
-              Color.fromARGB(255, 151, 199, 239),
+              Color.fromARGB(255, 92, 182, 255),
             ],
           ),
           borderRadius: BorderRadius.circular(16),
@@ -109,7 +109,7 @@ class MainCard extends StatelessWidget {
 
                 Obx(
                   () => _infoItem(
-                    'assets/images/Vector (2).svg',
+                    'assets/images/icon_wind.svg',
                     settingsController.formatWindSpeed(
                       weather.current.windSpeed,
                     ),
@@ -117,7 +117,7 @@ class MainCard extends StatelessWidget {
                 ),
 
                 _infoItem(
-                  'assets/images/Vector (4).svg',
+                  'assets/images/icon_humidity.svg',
                   "${weather.current.humidity}%",
                 ),
               ],

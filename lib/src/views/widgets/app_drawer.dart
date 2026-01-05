@@ -7,7 +7,7 @@ import 'package:weather_app/src/controllers/saved_locations_controller.dart';
 import 'package:weather_app/src/controllers/settings_controller.dart';
 import 'package:weather_app/src/views/widgets/animated_text.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
-import 'package:weather_app/src/views/widgets/saved_locatio_tile.dart';
+import 'package:weather_app/src/views/widgets/tiles/saved_location_tile.dart';
 
 class AppDrawer extends StatelessWidget {
   final VoidCallback onMenuTap;

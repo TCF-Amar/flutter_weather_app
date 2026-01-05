@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
@@ -8,24 +8,6 @@ class WeeklyList extends StatelessWidget {
   final List<int> indexes;
 
   const WeeklyList({super.key, required this.daily, required this.indexes});
-
-  String _getDayLabel(String date) {
-    try {
-      final parsedDate = DateTime.parse(date);
-
-      return DateFormat('EEEE').format(parsedDate);
-    } catch (e) {
-      return DateFormat('EEEE').format(DateTime.parse(date));
-    }
-  }
-
-  String _date(String date) {
-    try {
-      return DateFormat('d MMM').format(DateTime.parse(date));
-    } catch (e) {
-      return date;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,17 +44,15 @@ class WeeklyList extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             // border: Border.all(color: Colors.grey.shade200, width: 1),
           ),
-          child: Column(
+          child: Row(
             children: [
               ///  Icon
-              Center(
-                child: Icon(
-                  WeatherIconMapper.getIcon(daily.weatherCode[index]),
-                  size: 32,
-                  color: Colors.orangeAccent,
-                ),
+              Icon(
+                WeatherIconMapper.getIcon(daily.weatherCode[index]),
+                size: 32,
+                color: Colors.orangeAccent,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
 
               ///  Day + Date
               Expanded(
@@ -81,13 +61,13 @@ class WeeklyList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AppText(
-                      text: _getDayLabel(daily.date[index]),
+                      text: DateTimeHelper.formatDay(daily.date[index]),
                       bold: true,
                       fontSize: 15,
                     ),
                     const SizedBox(height: 4),
                     AppText(
-                      text: _date(daily.date[index]),
+                      text: DateTimeHelper.formatDate(daily.date[index]),
                       fontSize: 12,
                       color: Colors.grey.shade600,
                     ),

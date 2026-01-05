@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
-import 'package:weather_app/src/views/widgets/weekly_list.dart';
+import 'package:weather_app/src/views/widgets/lists/weekly_list.dart';
 
 class WeeklyForecastCard extends StatefulWidget {
   final WeatherModel weather;
@@ -31,7 +31,7 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
   @override
   Widget build(BuildContext context) {
     final daily = widget.weather.daily;
-    
+
     // Validate data
     if (daily.date.isEmpty) {
       return Container(
@@ -48,9 +48,7 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
             ),
           ],
         ),
-        child: const Center(
-          child: AppText(text: 'No forecast data available'),
-        ),
+        child: const Center(child: AppText(text: 'No forecast data available')),
       );
     }
 
@@ -80,7 +78,7 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
         children: [
           const AppText(text: 'Weekly Forecast', fontSize: 20, bold: true),
           const SizedBox(height: 12),
-      
+
           /// 🔹 Card
           Container(
             decoration: BoxDecoration(
@@ -97,7 +95,7 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
             child: Column(
               children: [
                 const SizedBox(height: 8),
-      
+
                 /// 🔹 Tabs (pill style)
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 12),
@@ -122,9 +120,9 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
                     ],
                   ),
                 ),
-      
+
                 const SizedBox(height: 12),
-      
+
                 /// 🔹 Content
                 SizedBox(
                   height: 550,

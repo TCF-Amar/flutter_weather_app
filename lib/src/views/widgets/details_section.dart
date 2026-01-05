@@ -15,10 +15,9 @@ class DetailsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// Safe access to UV Index - use first value if available, otherwise show N/A
-    final uvIndexValue =
-        weather.daily.uvIndex.isNotEmpty
-            ? weather.daily.uvIndex[0].toStringAsFixed(1)
-            : "N/A";
+    final uvIndexValue = weather.daily.uvIndex.isNotEmpty
+        ? weather.daily.uvIndex[0].toStringAsFixed(1)
+        : "N/A";
 
     return Expanded(
       child: GridView.count(
@@ -59,15 +58,15 @@ class _DetailsCard extends StatelessWidget {
   String _getIconPath(String title) {
     switch (title.toLowerCase()) {
       case 'humidity':
-        return 'assets/images/Vector (4).svg';
+        return 'assets/images/icon_humidity.svg';
       case 'pressure':
-        return 'assets/images/Vector (2).svg';
+        return 'assets/images/icon_wind.svg';
       case 'uv index':
-        return 'assets/images/Vector (3).svg';
+        return 'assets/images/icon_uv_index.svg';
       case "temperature":
-        return 'assets/images/Vector (1).svg';
+        return 'assets/images/icon_temperature.svg';
       default:
-        return 'assets/images/Vector.svg';
+        return 'assets/images/icon_fallback.svg';
     }
   }
 
@@ -75,7 +74,7 @@ class _DetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      color: Colors.white.withValues(alpha: 0.1),
+      color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -83,7 +82,15 @@ class _DetailsCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(_getIconPath(title), height: 34, width: 34),
+            SvgPicture.asset(
+              _getIconPath(title),
+              height: 34,
+              width: 34,
+              colorFilter: const ColorFilter.mode(
+                Colors.black,
+                BlendMode.srcIn,
+              ),
+            ),
             const SizedBox(width: 8),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -92,14 +99,14 @@ class _DetailsCard extends StatelessWidget {
                   text: title,
                   fontSize: 14,
                   bold: false,
-                  color: Colors.white70,
+                  color: Colors.black,
                 ),
                 const SizedBox(height: 4),
                 AppText(
                   text: value,
                   fontSize: 18,
                   bold: true,
-                  color: Colors.white,
+                  color: Colors.grey,
                 ),
               ],
             ),

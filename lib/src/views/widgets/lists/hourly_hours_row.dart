@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
@@ -26,27 +26,6 @@ class HourlyHoursRow extends StatelessWidget {
 
   final SettingsController settingsController = Get.find();
 
-  String _formatHour(String time) {
-    try {
-      return DateFormat.jm().format(DateTime.parse(time));
-    } catch (e) {
-      return "N/A";
-    }
-  }
-
-  bool _isNow(String time) {
-    try {
-      final now = DateTime.now();
-      final t = DateTime.parse(time);
-      return t.year == now.year &&
-          t.month == now.month &&
-          t.day == now.day &&
-          t.hour == now.hour;
-    } catch (e) {
-      return false;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     // Validate bounds to prevent crashes
@@ -58,14 +37,12 @@ class HourlyHoursRow extends StatelessWidget {
 
     final safeItemCount = itemCount > 0 && startIndex < maxValidIndex
         ? (startIndex + itemCount <= maxValidIndex
-            ? itemCount
-            : maxValidIndex - startIndex)
+              ? itemCount
+              : maxValidIndex - startIndex)
         : 0;
 
     if (safeItemCount <= 0) {
-      return const Center(
-        child: AppText(text: "No hourly data available"),
-      );
+      return const Center(child: AppText(text: "No hourly data available"));
     }
 
     return SizedBox(
@@ -76,7 +53,7 @@ class HourlyHoursRow extends StatelessWidget {
         separatorBuilder: (_, _) => const SizedBox(width: 20),
         itemBuilder: (context, i) {
           final index = startIndex + i;
-          
+
           // Double-check bounds (shouldn't happen, but safety first)
           if (index >= times.length ||
               index >= weatherCodes.length ||
@@ -85,14 +62,14 @@ class HourlyHoursRow extends StatelessWidget {
           }
 
           final timeStr = times[index];
-          final isNow = _isNow(timeStr);
+          final isNow = DateTimeHelper.isNow(timeStr);
 
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               /// Hour / NOW
               AppText(
-                text: _formatHour(timeStr),
+                text: DateTimeHelper.formatTime(timeStr),
                 fontSize: 13,
                 color: isNow ? Colors.blue : Colors.grey,
                 bold: isNow,

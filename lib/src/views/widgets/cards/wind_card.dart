@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
 class WindPressureCard extends StatelessWidget {
-  final double windSpeed; // mph
-  final double pressure; // mBar
+  final WeatherModel weather;
 
-  const WindPressureCard({
-    super.key,
-    required this.windSpeed,
-    required this.pressure,
-  });
+  const WindPressureCard({super.key, required this.weather});
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +14,14 @@ class WindPressureCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-      
           /// Header
           const AppText(
-              text: 'Wind', fontSize: 20, bold: true, color: Colors.black
+            text: 'Wind',
+            fontSize: 20,
+            bold: true,
+            color: Colors.black,
           ),
+
           /// 🔹 Card
           Container(
             margin: const EdgeInsets.only(top: 10),
@@ -48,7 +47,11 @@ class WindPressureCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
-                        AppText(text: 'Conditions', fontSize: 12, color: Colors.grey),
+                        AppText(
+                          text: 'Conditions',
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
                         SizedBox(height: 4),
                         AppText(text: 'Pressure', fontSize: 16, bold: true),
                       ],
@@ -56,9 +59,9 @@ class WindPressureCard extends StatelessWidget {
                     const Icon(Icons.tune, size: 18, color: Colors.indigo),
                   ],
                 ),
-          
+
                 const SizedBox(height: 24),
-          
+
                 /// 🔹 Content Row
                 Row(
                   children: [
@@ -76,10 +79,9 @@ class WindPressureCard extends StatelessWidget {
                         size: 46,
                       ),
                     ),
-          
+
                     const SizedBox(width: 36),
-          
-          
+
                     /// 📊 Wind & Pressure
                     Expanded(
                       child: Row(
@@ -96,13 +98,14 @@ class WindPressureCard extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               AppText(
-                                text: '${windSpeed.toStringAsFixed(0)} mph',
+                                text:
+                                    '${weather.current.windSpeed.toStringAsFixed(0)} mph',
                                 fontSize: 16,
                                 bold: true,
                               ),
                             ],
                           ),
-          
+
                           /// Barometer
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +117,8 @@ class WindPressureCard extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               AppText(
-                                text: '${pressure.toStringAsFixed(0)} mBar',
+                                text:
+                                    '${weather.current.pressure.toStringAsFixed(0)} mBar',
                                 fontSize: 16,
                                 bold: true,
                               ),

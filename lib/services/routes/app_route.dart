@@ -3,7 +3,7 @@ import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/models/news_model.dart';
 import 'package:weather_app/src/models/place_model.dart';
 import 'package:weather_app/src/views/screens/details_screen.dart';
-import 'package:weather_app/src/views/screens/home_wrapar.dart';
+import 'package:weather_app/src/views/screens/home_wrapper.dart';
 import 'package:weather_app/src/views/screens/news_screen.dart';
 import 'package:weather_app/src/views/screens/search_screen.dart';
 import 'package:weather_app/src/views/screens/splash_screen.dart';

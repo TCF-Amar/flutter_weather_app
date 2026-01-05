@@ -10,12 +10,11 @@ import 'package:weather_app/src/views/widgets/animated_text.dart';
 import 'package:weather_app/src/views/widgets/app_drawer.dart';
 import 'package:weather_app/src/views/widgets/app_scaffold.dart';
 import 'package:weather_app/src/views/widgets/cards/hourly_card.dart';
-import 'package:weather_app/src/views/widgets/cards/main_card.dart';
 import 'package:weather_app/src/views/widgets/cards/news_container.dart';
 import 'package:weather_app/src/views/widgets/cards/seven_day_forecast.dart';
 import 'package:weather_app/src/views/widgets/cards/sun_condition_card.dart';
-import 'package:weather_app/src/views/widgets/cards/weekly_forecast_card.dart';
 import 'package:weather_app/src/views/widgets/cards/wind_card.dart';
+import 'package:weather_app/src/views/widgets/locations_carousel.dart';
 
 class HomeScreen extends StatelessWidget {
   final VoidCallback onMenuTap;
@@ -36,10 +35,7 @@ class HomeScreen extends StatelessWidget {
       titleWidget: Obx(() {
         final weather = weatherController.weather.value;
         return AnimatedText(
-          text:
-              weather?.place?.name ??
-              placeController.currentPlace.value?.name ??
-              'Weather',
+          text: weather?.place?.name.split(',')[1] ?? 'Weather',
           fontSize: 24,
           // color: Colors.white,
           fontWeight: FontWeight.bold,
@@ -184,15 +180,12 @@ class _WeatherView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            MainCard(weather: weather),
+            LocationsCarousel(currentWeather: weather),
             HourlyForecastCard(weather: weather),
             // WeeklyForecastCard(weather: weather),
             SevenDayForecast(weather: weather),
             SunConditionCard(weather: weather),
-            WindPressureCard(
-              windSpeed: weather.current.windSpeed,
-              pressure: weather.current.pressure,
-            ),
+            WindPressureCard(weather: weather),
             NewsCard(news: news),
           ],
         ),

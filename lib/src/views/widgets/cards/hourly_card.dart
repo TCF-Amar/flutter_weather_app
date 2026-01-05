@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
-import 'package:weather_app/src/views/widgets/hourly_hours_row.dart';
+import 'package:weather_app/src/views/widgets/lists/hourly_hours_row.dart';
 
 class HourlyForecastCard extends StatelessWidget {
   final WeatherModel weather;
@@ -24,12 +24,6 @@ class HourlyForecastCard extends StatelessWidget {
     }
     return 0;
   }
-
-
-  String _formatDate(String time) {
-    return DateFormat('MMMM d, yyyy').format(DateTime.parse(time));
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +79,7 @@ class HourlyForecastCard extends StatelessWidget {
 
                 /// 🔹 Date
                 AppText(
-                  text: _formatDate(hourly.time[startIndex]),
+                  text: DateTimeHelper.formatDate(hourly.time[startIndex]),
                   fontSize: 18,
                   bold: true,
                 ),

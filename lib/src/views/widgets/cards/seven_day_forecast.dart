@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
-import 'package:weather_app/src/views/widgets/weekly_list.dart';
+import 'package:weather_app/src/views/widgets/lists/forecast_list.dart';
 
 class SevenDayForecast extends StatelessWidget {
   final WeatherModel weather;
@@ -71,6 +71,7 @@ class SevenDayForecast extends StatelessWidget {
                   child: Row(
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AppText(
                             text: WeatherIconMapper.getText(
@@ -82,14 +83,12 @@ class SevenDayForecast extends StatelessWidget {
                           const SizedBox(height: 4),
                           AppText(
                             /// 1 jun 2026
-                            text: DateFormat(
-                              'd MMM yyyy',
-                            ).format(DateTime.now()),
+                            text: DateTimeHelper.formatDate(
+                              DateTime.now().toIso8601String(),
+                            ),
                             fontSize: 20,
                             // color: Colors.grey,
                             bold: true,
-
-
                           ),
                         ],
                       ),
@@ -98,7 +97,8 @@ class SevenDayForecast extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
 
-                WeeklyList(daily: daily, indexes: forecastIndexes),
+                // WeeklyList(daily: daily, indexes: forecastIndexes),
+                ForecastList(daily: daily, indexes: forecastIndexes),
               ],
             ),
           ),
