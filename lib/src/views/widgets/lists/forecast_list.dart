@@ -12,7 +12,8 @@ class ForecastList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: EdgeInsets.only(left: 20, right: 20),
       height: 130,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

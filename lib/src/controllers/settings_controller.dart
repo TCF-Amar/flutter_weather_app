@@ -9,11 +9,9 @@ enum WindSpeedUnit { kmh, mph }
 /// Controller for user settings and preferences
 /// Manages temperature and wind speed unit preferences
 class SettingsController extends GetxController {
-  // ─────────── State Variables ───────────
   var temperatureUnit = TemperatureUnit.celsius.obs;
   var windSpeedUnit = WindSpeedUnit.kmh.obs;
 
-  // ─────────── Public Methods ───────────
 
   /// Toggle between Celsius and Fahrenheit
   void toggleTemperatureUnit() {

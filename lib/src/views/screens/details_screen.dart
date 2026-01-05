@@ -120,10 +120,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [
-                      Color.fromARGB(255, 0, 140, 255),
-                      Color.fromARGB(255, 60, 160, 243),
-                    ],
+                    colors: [AppColors.grigent1, AppColors.grigent2],
                   ),
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(28),

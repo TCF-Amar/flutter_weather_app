@@ -60,68 +60,70 @@ Shared from Weather App
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          /// Handle bar
-          Container(
-            width: 40,
-            height: 4,
-            decoration: BoxDecoration(
-              color: AppColors.grey,
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-
-          const SizedBox(height: 20),
-
-          /// Title
-          const AppText(text: 'Share Weather', fontSize: 20, bold: true),
-
-          const SizedBox(height: 24),
-
-          /// Share options
-          _ShareOption(
-            icon: Icons.share,
-            title: 'Share via Apps',
-            subtitle: 'Share to WhatsApp, Messages, etc.',
-            onTap: () => _shareViaApps(context),
-          ),
-
-          const SizedBox(height: 12),
-
-          _ShareOption(
-            icon: Icons.copy,
-            title: 'Copy to Clipboard',
-            subtitle: 'Copy weather information',
-            onTap: () => _copyToClipboard(context),
-          ),
-
-          const SizedBox(height: 24),
-
-          /// Cancel button
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton(
-              onPressed: () => Navigator.pop(context),
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+    return SafeArea(
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        decoration: const BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            /// Handle bar
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: AppColors.grey,
+                borderRadius: BorderRadius.circular(2),
               ),
-              child: const Text('Cancel'),
             ),
-          ),
 
-          const SizedBox(height: 8),
-        ],
+            const SizedBox(height: 20),
+
+            /// Title
+            const AppText(text: 'Share Weather', fontSize: 20, bold: true),
+
+            const SizedBox(height: 24),
+
+            /// Share options
+            _ShareOption(
+              icon: Icons.share,
+              title: 'Share via Apps',
+              subtitle: 'Share to WhatsApp, Messages, etc.',
+              onTap: () => _shareViaApps(context),
+            ),
+
+            const SizedBox(height: 12),
+
+            _ShareOption(
+              icon: Icons.copy,
+              title: 'Copy to Clipboard',
+              subtitle: 'Copy weather information',
+              onTap: () => _copyToClipboard(context),
+            ),
+
+            const SizedBox(height: 24),
+
+            /// Cancel button
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () => Navigator.pop(context),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text('Cancel'),
+              ),
+            ),
+
+            const SizedBox(height: 8),
+          ],
+        ),
       ),
     );
   }
@@ -169,11 +171,7 @@ class _ShareOption extends StatelessWidget {
                 children: [
                   AppText(text: title, fontSize: 16, bold: true),
                   const SizedBox(height: 4),
-                  AppText(
-                    text: subtitle,
-                    fontSize: 13,
-                    color: AppColors.grey,
-                  ),
+                  AppText(text: subtitle, fontSize: 13, color: AppColors.grey),
                 ],
               ),
             ),

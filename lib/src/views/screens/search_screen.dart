@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/src/controllers/search_controller.dart';
 import 'package:weather_app/src/views/widgets/app_scaffold.dart';

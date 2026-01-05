@@ -12,6 +12,7 @@ import 'package:weather_app/src/views/widgets/cards/hourly_card.dart';
 import 'package:weather_app/src/views/widgets/cards/seven_day_forecast.dart';
 import 'package:weather_app/src/views/widgets/cards/sun_condition_card.dart';
 import 'package:weather_app/src/views/widgets/cards/wind_card.dart';
+import 'package:weather_app/src/views/widgets/share_options_sheet.dart';
 
 class MyLocationsScreen extends StatelessWidget {
   MyLocationsScreen({super.key});
@@ -26,7 +27,12 @@ class MyLocationsScreen extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-            SharePlus.instance.share(ShareParams(text: 'Share this app'));
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) =>
+                  ShareOptionsSheet(weather: weather, place: weather.place!),
+            );
           },
           icon: Icon(Icons.share),
         ),
@@ -43,10 +49,7 @@ class MyLocationsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                     gradient: const LinearGradient(
                       begin: Alignment.centerLeft,
-                      colors: [
-                        Color.fromARGB(255, 0, 140, 255),
-                        Color.fromARGB(255, 92, 182, 255),
-                      ],
+                      colors: [AppColors.grigent1, AppColors.grigent2],
                     ),
                   ),
                   child: Row(

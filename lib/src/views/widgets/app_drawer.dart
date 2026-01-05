@@ -196,7 +196,12 @@ class AppDrawer extends StatelessWidget {
   }) {
     return GestureDetector(
       onTap: onTap,
-      child: AppText(text: title, fontSize: 15, color: AppColors.white),
+      child: AppText(
+        text: title,
+        fontSize: 18,
+        color: AppColors.white,
+        bold: true,
+      ),
     );
   }
 }

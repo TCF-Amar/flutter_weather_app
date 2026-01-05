@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/src/controllers/settings_controller.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
 class WindPressureCard extends StatelessWidget {
   final WeatherModel weather;
 
-  const WindPressureCard({super.key, required this.weather});
-
+  WindPressureCard({super.key, required this.weather});
+  final SettingsController settingsController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -99,8 +101,9 @@ class WindPressureCard extends StatelessWidget {
                               ),
                               const SizedBox(height: 4),
                               AppText(
-                                text:
-                                    '${weather.current.windSpeed.toStringAsFixed(0)} mph',
+                                text: settingsController.formatWindSpeed(
+                                  weather.current.windSpeed,
+                                ),
                                 fontSize: 16,
                                 bold: true,
                               ),

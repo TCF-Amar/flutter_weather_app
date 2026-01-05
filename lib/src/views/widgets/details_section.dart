@@ -12,7 +12,6 @@ class DetailsSection extends StatelessWidget {
   DetailsSection(this.weather, {super.key});
 
   final SettingsController settingsController = Get.find();
-
   @override
   Widget build(BuildContext context) {
     /// Safe access to UV Index - use first value if available, otherwise show N/A
@@ -40,8 +39,9 @@ class DetailsSection extends StatelessWidget {
             value: "${weather.current.humidity} %",
           ),
           _DetailsCard(
-            title: "Pressure",
-            value: "${weather.current.pressure.toStringAsFixed(0)} hPa",
+            title: "Wind Speed",
+            value:
+                "${settingsController.formatWindSpeed(weather.current.windSpeed)}",
           ),
           _DetailsCard(title: "UV Index", value: uvIndexValue),
         ],
@@ -60,7 +60,7 @@ class _DetailsCard extends StatelessWidget {
     switch (title.toLowerCase()) {
       case 'humidity':
         return 'assets/images/icon_humidity.svg';
-      case 'pressure':
+      case 'wind speed':
         return 'assets/images/icon_wind.svg';
       case 'uv index':
         return 'assets/images/icon_uv_index.svg';
