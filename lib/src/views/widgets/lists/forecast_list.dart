@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 
 class ForecastList extends StatelessWidget {
   final dynamic daily;
@@ -35,17 +36,17 @@ class ForecastList extends StatelessWidget {
                     ? AppText(
                         text: DateTimeHelper.formatShortDate(date),
                         bold: true,
-                        color: Colors.blue,
+                        color: AppColors.blue,
                       )
                     : AppText(
                         text: DateTimeHelper.formatShortDate(date),
-                        color: Colors.black,
+                        color: AppColors.black,
                       ),
                 const SizedBox(height: 8),
                 Icon(
                   WeatherIconMapper.getIcon(weatherCode),
                   size: 30,
-                  color: Colors.orangeAccent,
+                  color: AppColors.orangeAccent,
                 ),
                 const SizedBox(height: 8),
                 Column(
@@ -68,13 +69,13 @@ class ForecastList extends StatelessWidget {
                             Icon(
                               Icons.water_drop,
                               size: 12,
-                              color: Colors.blue.shade400,
+                              color: AppColors.blueAccent,
                             ),
                             const SizedBox(width: 2),
                             AppText(
                               text: "${daily.rainProbability[index]}%",
                               fontSize: 11,
-                              color: Colors.blue.shade600,
+                              color: AppColors.blue,
                             ),
                           ],
                         ),

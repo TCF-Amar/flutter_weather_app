@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
 class SettingsSectionHeader extends StatelessWidget {
@@ -13,7 +14,7 @@ class SettingsSectionHeader extends StatelessWidget {
         text: title.toUpperCase(),
         fontSize: 13,
         bold: true,
-        color: Colors.grey[600],
+        color: AppColors.grey,
       ),
     );
   }
@@ -27,11 +28,11 @@ class SettingsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
+            color: AppColors.black.withValues(alpha: 0.03),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -60,12 +61,12 @@ class SettingsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: icon != null
-          ? Icon(icon, color: Colors.blue[600], size: 24)
+          ? Icon(icon, color: AppColors.blue, size: 24)
           : null,
       title: AppText(text: title, fontSize: 16, bold: false),
       trailing:
           trailing ??
-          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+          const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.grey),
       onTap: onTap,
     );
   }
@@ -86,8 +87,17 @@ class SettingsToggle extends StatelessWidget {
         height: 40,
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.grey[100],
+            color: AppColors.blue.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(100),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.white.withValues(alpha: 0.5),
+                blurRadius: 1,
+                offset: const Offset(0, 0),
+                spreadRadius: 1,
+                blurStyle: BlurStyle.inner,
+              ),
+            ],
           ),
           child: Row(
             children: options
@@ -110,17 +120,14 @@ class SettingsToggle extends StatelessWidget {
                 ? const LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [
-                      Color.fromARGB(255, 8, 107, 255),
-                      Color.fromARGB(255, 128, 158, 203),
-                    ],
+                    colors: [AppColors.grigent1, AppColors.grigent2],
                   )
                 : null,
             borderRadius: BorderRadius.circular(100),
             boxShadow: option.isSelected
                 ? [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.05),
+                      color: AppColors.white.withValues(alpha: 0.2),
                       blurRadius: 4,
                       offset: const Offset(0, 2),
                     ),
@@ -132,7 +139,7 @@ class SettingsToggle extends StatelessWidget {
               text: option.label,
               fontSize: 14,
               bold: option.isSelected,
-              color: option.isSelected ? Colors.white : Colors.grey[600],
+              color: option.isSelected ? AppColors.white : AppColors.black,
             ),
           ),
         ),

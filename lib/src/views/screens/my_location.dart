@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/controllers/settings_controller.dart';
 import 'package:weather_app/src/controllers/weather_controller.dart';
@@ -21,6 +23,14 @@ class MyLocationsScreen extends StatelessWidget {
     final weather = weatherController.weather.value!;
     return AppScaffold(
       title: 'My Locations',
+      actions: [
+        IconButton(
+          onPressed: () {
+            SharePlus.instance.share(ShareParams(text: 'Share this app'));
+          },
+          icon: Icon(Icons.share),
+        ),
+      ],
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
@@ -44,7 +54,7 @@ class MyLocationsScreen extends StatelessWidget {
                       Icon(
                         WeatherIconMapper.getIcon(weather.current.weatherCode),
                         size: 50,
-                        color: Colors.orange,
+                        color: AppColors.orange,
                       ),
                       SizedBox(width: 20),
 
@@ -54,13 +64,13 @@ class MyLocationsScreen extends StatelessWidget {
                           children: [
                             AnimatedText(
                               text: weather.place!.displayName,
-                              color: Colors.white,
+                              color: AppColors.white,
                             ),
                             AppText(
                               text: WeatherIconMapper.getText(
                                 weather.current.weatherCode,
                               ),
-                              color: Colors.white,
+                              color: AppColors.white,
                             ),
                           ],
                         ),
@@ -72,7 +82,7 @@ class MyLocationsScreen extends StatelessWidget {
                           weather.current.temperature,
                         ),
                         fontSize: 26,
-                        color: Colors.white,
+                        color: AppColors.white,
                         // bold: true,
                       ),
                     ],

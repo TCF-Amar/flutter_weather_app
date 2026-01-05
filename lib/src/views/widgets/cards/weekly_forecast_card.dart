@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 import 'package:weather_app/src/views/widgets/lists/weekly_list.dart';
@@ -38,11 +39,11 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
         margin: const EdgeInsets.only(top: 20),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(28),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.06),
+              color: AppColors.black.withValues(alpha: 0.06),
               blurRadius: 20,
               offset: const Offset(0, 8),
             ),
@@ -82,11 +83,11 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
           /// 🔹 Card
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.06),
+                  color: AppColors.black.withValues(alpha: 0.06),
                   blurRadius: 20,
                   offset: const Offset(0, 8),
                 ),
@@ -100,20 +101,20 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
+                    color: AppColors.grey,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: TabBar(
                     controller: _tabController,
                     indicator: BoxDecoration(
-                      color: Colors.blue,
+                      color: AppColors.blue,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.grey.shade600,
+                    labelColor: AppColors.white,
+                    unselectedLabelColor: AppColors.grey,
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorWeight: 4,
-                    dividerColor: Colors.transparent,
+                    dividerColor: AppColors.transparent,
                     tabs: [
                       Tab(text: 'Past 7 days'),
                       Tab(text: 'Forecast'),

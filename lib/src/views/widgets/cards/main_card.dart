@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/models/weather_model.dart';
@@ -32,10 +33,7 @@ class MainCard extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             begin: Alignment.centerLeft,
-            colors: [
-              Color.fromARGB(255, 0, 140, 255),
-              Color.fromARGB(255, 92, 182, 255),
-            ],
+            colors: [AppColors.grigent1, AppColors.grigent2],
           ),
           borderRadius: BorderRadius.circular(16),
         ),
@@ -51,7 +49,7 @@ class MainCard extends StatelessWidget {
                   children: [
                     AppText(
                       text: "Chance of rain ${weather.current.precipitation}%",
-                      color: Colors.white,
+                      color: AppColors.white,
                     ),
                     const SizedBox(height: 4),
                     AppText(
@@ -60,14 +58,14 @@ class MainCard extends StatelessWidget {
                       ),
                       fontSize: 30,
                       bold: true,
-                      color: Colors.white,
+                      color: AppColors.white,
                     ),
                   ],
                 ),
                 Icon(
                   WeatherIconMapper.getIcon(weather.current.weatherCode),
                   size: 90,
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ],
             ),
@@ -77,12 +75,12 @@ class MainCard extends StatelessWidget {
             /// ───────── Location ─────────
             Row(
               children: [
-                const Icon(Icons.location_on, color: Colors.white),
+                const Icon(Icons.location_on, color: AppColors.white),
                 const SizedBox(width: 4),
                 Expanded(
                   child: AppText(
                     text: place.name.split(',').take(2).join(', '),
-                    color: Colors.white,
+                    color: AppColors.white,
                     bold: true,
                     maxLines: 1,
                   ),
@@ -103,7 +101,7 @@ class MainCard extends StatelessWidget {
                     ),
                     fontSize: 30,
                     bold: true,
-                    color: Colors.white,
+                    color: AppColors.white,
                   ),
                 ),
 
@@ -136,10 +134,10 @@ class MainCard extends StatelessWidget {
           asset,
           height: 20,
           width: 20,
-          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+          colorFilter: const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
         ),
         const SizedBox(width: 6),
-        AppText(text: text, color: Colors.white, bold: true),
+        AppText(text: text, color: AppColors.white, bold: true),
       ],
     );
   }

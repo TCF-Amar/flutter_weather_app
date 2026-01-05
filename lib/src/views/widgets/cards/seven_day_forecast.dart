@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/models/weather_model.dart';
@@ -53,11 +54,11 @@ class SevenDayForecast extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(top: 20, bottom: 10),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.06),
+                  color: AppColors.black.withValues(alpha: 0.06),
                   blurRadius: 20,
                   offset: const Offset(0, 8),
                 ),
@@ -78,7 +79,7 @@ class SevenDayForecast extends StatelessWidget {
                               weather.current.weatherCode,
                             ),
                             fontSize: 16,
-                            color: Colors.grey,
+                            color: AppColors.grey,
                           ),
                           const SizedBox(height: 4),
                           AppText(
@@ -87,7 +88,7 @@ class SevenDayForecast extends StatelessWidget {
                               DateTime.now().toIso8601String(),
                             ),
                             fontSize: 20,
-                            // color: Colors.grey,
+                            // color: AppColors.grey,
                             bold: true,
                           ),
                         ],
@@ -113,11 +114,11 @@ class SevenDayForecast extends StatelessWidget {
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
+            color: AppColors.black.withValues(alpha: 0.06),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),

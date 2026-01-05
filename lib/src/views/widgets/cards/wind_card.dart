@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
@@ -19,7 +20,7 @@ class WindPressureCard extends StatelessWidget {
             text: 'Wind',
             fontSize: 20,
             bold: true,
-            color: Colors.black,
+            color: AppColors.black,
           ),
 
           /// 🔹 Card
@@ -27,11 +28,11 @@ class WindPressureCard extends StatelessWidget {
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
+                  color: AppColors.black.withValues(alpha: 0.08),
                   blurRadius: 16,
                   offset: const Offset(0, 6),
                 ),
@@ -50,13 +51,13 @@ class WindPressureCard extends StatelessWidget {
                         AppText(
                           text: 'Conditions',
                           fontSize: 12,
-                          color: Colors.grey,
+                          color: AppColors.grey,
                         ),
                         SizedBox(height: 4),
                         AppText(text: 'Pressure', fontSize: 16, bold: true),
                       ],
                     ),
-                    const Icon(Icons.tune, size: 18, color: Colors.indigo),
+                    const Icon(Icons.tune, size: 18, color: AppColors.indigo),
                   ],
                 ),
 
@@ -70,12 +71,12 @@ class WindPressureCard extends StatelessWidget {
                       width: 48,
                       height: 48,
                       decoration: BoxDecoration(
-                        // color: Colors.indigo.withOpacity(0.1),
+                        // color: AppColors.indigo.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: const Icon(
                         Icons.air_rounded,
-                        color: Colors.indigo,
+                        color: AppColors.indigo,
                         size: 46,
                       ),
                     ),
@@ -94,7 +95,7 @@ class WindPressureCard extends StatelessWidget {
                               const AppText(
                                 text: 'Wind',
                                 fontSize: 12,
-                                color: Colors.grey,
+                                color: AppColors.grey,
                               ),
                               const SizedBox(height: 4),
                               AppText(
@@ -113,7 +114,7 @@ class WindPressureCard extends StatelessWidget {
                               const AppText(
                                 text: 'Barrometer',
                                 fontSize: 12,
-                                color: Colors.grey,
+                                color: AppColors.grey,
                               ),
                               const SizedBox(height: 4),
                               AppText(

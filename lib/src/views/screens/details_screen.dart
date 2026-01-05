@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/controllers/details_controller.dart';
@@ -8,6 +9,7 @@ import 'package:weather_app/src/controllers/saved_locations_controller.dart';
 import 'package:weather_app/src/models/place_model.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/animated_text.dart';
+import 'package:weather_app/src/views/widgets/app_scaffold.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 import 'package:weather_app/src/views/widgets/details_section.dart';
 import 'package:weather_app/src/views/widgets/lists/hourly_hours_row.dart';
@@ -53,7 +55,7 @@ class _DetailsScreenState extends State<DetailsScreen>
   void _showShareOptions(BuildContext context, WeatherModel weather) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparent,
       builder: (context) =>
           ShareOptionsSheet(weather: weather, place: widget.place),
     );
@@ -69,35 +71,25 @@ class _DetailsScreenState extends State<DetailsScreen>
       final errorValue = detailsController.error.value;
 
       if (isLoadingValue || weatherValue == null) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('Loading'),
-            centerTitle: true,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new),
-
-              onPressed: () {
-                context.pop();
-              },
-            ),
-          ),
+        return AppScaffold(
+          title: 'Loading',
           body: const Center(child: CircularProgressIndicator()),
         );
       }
 
       if (errorValue.isNotEmpty) {
-        return Scaffold(
-          appBar: AppBar(title: Text('Error')),
+        return AppScaffold(
+          title: 'Error',
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.error_outline, size: 48, color: Colors.red),
+                const Icon(Icons.error_outline, size: 48, color: AppColors.red),
                 const SizedBox(height: 16),
                 Text(
                   errorValue,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.red),
+                  style: const TextStyle(color: AppColors.red),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
@@ -150,14 +142,14 @@ class _DetailsScreenState extends State<DetailsScreen>
                             },
                             icon: const Icon(
                               Icons.arrow_back_ios_new,
-                              color: Colors.white,
+                              color: AppColors.white,
                             ),
                           ),
                           Expanded(
                             child: AnimatedText(
                               text: widget.place.name,
                               fontSize: 20,
-                              color: Colors.white,
+                              color: AppColors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -173,7 +165,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                                     },
                                     icon: const Icon(
                                       Icons.bookmark,
-                                      color: Colors.white,
+                                      color: AppColors.white,
                                     ),
                                   )
                                 : IconButton(
@@ -184,14 +176,17 @@ class _DetailsScreenState extends State<DetailsScreen>
                                     },
                                     icon: const Icon(
                                       Icons.bookmark_outline,
-                                      color: Colors.white,
+                                      color: AppColors.white,
                                     ),
                                   );
                           }),
                           IconButton(
                             onPressed: () =>
                                 _showShareOptions(context, weatherValue),
-                            icon: const Icon(Icons.share, color: Colors.white),
+                            icon: const Icon(
+                              Icons.share,
+                              color: AppColors.white,
+                            ),
                           ),
                         ],
                       ),
@@ -205,7 +200,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                         weatherValue.current.weatherCode,
                       ),
                       size: 70,
-                      color: Colors.white,
+                      color: AppColors.white,
                     ),
 
                     AppText(
@@ -214,7 +209,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                       ),
                       fontSize: 20,
                       bold: true,
-                      color: Colors.white,
+                      color: AppColors.white,
                     ),
 
                     AppText(
@@ -222,7 +217,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                         weatherValue.current.time.toString(),
                       ),
                       fontSize: 16,
-                      color: Colors.white70,
+                      color: AppColors.white,
                       bold: true,
                     ),
                   ],
@@ -238,11 +233,11 @@ class _DetailsScreenState extends State<DetailsScreen>
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.08),
+                      color: AppColors.black.withValues(alpha: 0.1),
                       blurRadius: 12,
                     ),
                   ],
@@ -253,9 +248,9 @@ class _DetailsScreenState extends State<DetailsScreen>
                     TabBar(
                       controller: _tabController,
 
-                      labelColor: Colors.blue,
-                      unselectedLabelColor: Colors.grey,
-                      indicatorColor: Colors.blue,
+                      labelColor: AppColors.primary,
+                      unselectedLabelColor: AppColors.grey,
+                      indicatorColor: AppColors.primary,
                       tabs: const [
                         Tab(text: "Yesterday"),
                         Tab(text: "Today"),

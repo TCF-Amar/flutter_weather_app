@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 
 class AnimatedText extends StatelessWidget {
   final String text;
@@ -17,7 +18,7 @@ class AnimatedText extends StatelessWidget {
     super.key,
     required this.text,
     this.fontSize = 20,
-    this.color = Colors.black,
+    this.color = AppColors.black,
     this.fontWeight = FontWeight.bold,
     this.velocity = 40,
     this.blankSpace = 50,

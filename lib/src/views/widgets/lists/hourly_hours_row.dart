@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
@@ -71,7 +72,7 @@ class HourlyHoursRow extends StatelessWidget {
               AppText(
                 text: DateTimeHelper.formatTime(timeStr),
                 fontSize: 13,
-                color: isNow ? Colors.blue : Colors.grey,
+                color: isNow ? AppColors.blue : AppColors.grey,
                 bold: isNow,
               ),
 
@@ -81,7 +82,7 @@ class HourlyHoursRow extends StatelessWidget {
               Icon(
                 WeatherIconMapper.getIcon(weatherCodes[index]),
                 size: 30,
-                color: Colors.orangeAccent,
+                color: AppColors.orangeAccent,
               ),
 
               const SizedBox(height: 8),

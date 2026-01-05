@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
@@ -74,7 +75,7 @@ class _DetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      color: Colors.white,
+      color: AppColors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -87,7 +88,7 @@ class _DetailsCard extends StatelessWidget {
               height: 34,
               width: 34,
               colorFilter: const ColorFilter.mode(
-                Colors.black,
+                AppColors.black,
                 BlendMode.srcIn,
               ),
             ),
@@ -99,14 +100,14 @@ class _DetailsCard extends StatelessWidget {
                   text: title,
                   fontSize: 14,
                   bold: false,
-                  color: Colors.black,
+                  color: AppColors.black,
                 ),
                 const SizedBox(height: 4),
                 AppText(
                   text: value,
                   fontSize: 18,
                   bold: true,
-                  color: Colors.grey,
+                  color: AppColors.grey,
                 ),
               ],
             ),

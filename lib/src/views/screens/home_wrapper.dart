@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/src/views/screens/home_screen.dart';
 import 'package:weather_app/src/views/widgets/app_drawer.dart';
 
@@ -39,13 +40,21 @@ class _HomeWrapperState extends State<HomeWrapper> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
               boxShadow: isDrawerOpen
-                  ? [BoxShadow(color: Colors.black26, blurRadius: 20)]
+                  ? [
+                      BoxShadow(
+                        color: AppColors.black.withValues(alpha: 0.2),
+                        blurRadius: 20,
+                      ),
+                    ]
                   : [],
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),
 
-              child: HomeScreen(onMenuTap: toggleDrawer, isDrawerOpen: isDrawerOpen),
+              child: HomeScreen(
+                onMenuTap: toggleDrawer,
+                isDrawerOpen: isDrawerOpen,
+              ),
             ),
           ),
         ],

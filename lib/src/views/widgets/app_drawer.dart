@@ -10,6 +10,7 @@ import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/animated_text.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 import 'package:weather_app/src/views/widgets/tiles/saved_location_tile.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 
 class AppDrawer extends StatelessWidget {
   final VoidCallback onMenuTap;
@@ -23,13 +24,13 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparent,
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color(0xFF3F6FD8), Color(0xFF7BA7F9)],
+            colors: [AppColors.grigent1, AppColors.grigent2],
           ),
         ),
         child: SafeArea(
@@ -44,7 +45,7 @@ class AppDrawer extends StatelessWidget {
                 const AppText(
                   text: 'Current location',
                   fontSize: 12,
-                  color: Colors.white70,
+                  color: AppColors.white,
                 ),
                 const SizedBox(height: 10),
 
@@ -59,7 +60,7 @@ class AppDrawer extends StatelessWidget {
                   },
                   child: Row(
                     children: [
-                      const Icon(Icons.location_on, color: Colors.white),
+                      const Icon(Icons.location_on, color: AppColors.white),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Obx(
@@ -69,7 +70,7 @@ class AppDrawer extends StatelessWidget {
                                     .split(',')[1] ??
                                 'Unknown',
                             fontSize: 18,
-                            color: Colors.white,
+                            color: AppColors.white,
                           ),
                         ),
                       ),
@@ -92,13 +93,13 @@ class AppDrawer extends StatelessWidget {
                   },
                   child: Row(
                     children: const [
-                      Icon(Icons.add_location_alt, color: Colors.yellow),
+                      Icon(Icons.add_location_alt, color: AppColors.yellow),
                       SizedBox(width: 10),
                       AppText(
                         text: 'Add Location',
                         fontSize: 16,
                         bold: true,
-                        color: Colors.yellow,
+                        color: AppColors.yellow,
                       ),
                     ],
                   ),
@@ -110,7 +111,7 @@ class AppDrawer extends StatelessWidget {
                 const AppText(
                   text: 'Saved Locations',
                   fontSize: 12,
-                  color: Colors.white70,
+                  color: AppColors.white,
                 ),
                 const SizedBox(height: 10),
 
@@ -120,7 +121,9 @@ class AppDrawer extends StatelessWidget {
                   child: Obx(() {
                     if (savedLocationsController.isLoading.value) {
                       return const Center(
-                        child: CircularProgressIndicator(color: Colors.white),
+                        child: CircularProgressIndicator(
+                          color: AppColors.white,
+                        ),
                       );
                     }
 
@@ -129,7 +132,7 @@ class AppDrawer extends StatelessWidget {
                         child: AppText(
                           text: 'No saved locations',
                           fontSize: 14,
-                          color: Colors.white70,
+                          color: AppColors.white,
                         ),
                       );
                     }
@@ -193,7 +196,7 @@ class AppDrawer extends StatelessWidget {
   }) {
     return GestureDetector(
       onTap: onTap,
-      child: AppText(text: title, fontSize: 15, color: Colors.white),
+      child: AppText(text: title, fontSize: 15, color: AppColors.white),
     );
   }
 }

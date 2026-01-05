@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/models/place_model.dart';
 import 'package:weather_app/src/models/weather_model.dart';
@@ -62,7 +63,7 @@ Shared from Weather App
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       child: Column(
@@ -73,7 +74,7 @@ Shared from Weather App
             width: 40,
             height: 4,
             decoration: BoxDecoration(
-              color: Colors.grey[300],
+              color: AppColors.grey,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -148,7 +149,7 @@ class _ShareOption extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey[300]!),
+          border: Border.all(color: AppColors.grey),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -156,10 +157,10 @@ class _ShareOption extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.blue.withValues(alpha: 0.1),
+                color: AppColors.blue.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(icon, color: Colors.blue, size: 24),
+              child: Icon(icon, color: AppColors.blue, size: 24),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -171,12 +172,12 @@ class _ShareOption extends StatelessWidget {
                   AppText(
                     text: subtitle,
                     fontSize: 13,
-                    color: Colors.grey[600]!,
+                    color: AppColors.grey,
                   ),
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey[400]),
+            Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.grey),
           ],
         ),
       ),

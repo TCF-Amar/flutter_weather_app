@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/src/controllers/saved_locations_controller.dart';
 import 'package:weather_app/src/models/place_model.dart';
 import 'package:weather_app/src/models/weather_model.dart';
@@ -78,13 +79,13 @@ class LocationsCarousel extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.location_on, color: Colors.white),
+              const Icon(Icons.location_on, color: AppColors.white),
               const SizedBox(width: 4),
               Expanded(
                 child: Text(
                   place.name.split(',').take(2).join(', '),
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: AppColors.white,
                     fontWeight: FontWeight.bold,
                   ),
                   maxLines: 1,
@@ -94,7 +95,7 @@ class LocationsCarousel extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          const Center(child: CircularProgressIndicator(color: Colors.white)),
+          const Center(child: CircularProgressIndicator(color: AppColors.white)),
           const Spacer(),
         ],
       ),

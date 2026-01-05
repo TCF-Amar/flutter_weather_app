@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
@@ -40,9 +41,9 @@ class WeeklyList extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
-            // color: Colors.grey.shade50,
+            // color: AppColors.grey.shade50,
             borderRadius: BorderRadius.circular(16),
-            // border: Border.all(color: Colors.grey.shade200, width: 1),
+            // border: Border.all(color: AppColors.grey.shade200, width: 1),
           ),
           child: Row(
             children: [
@@ -50,7 +51,7 @@ class WeeklyList extends StatelessWidget {
               Icon(
                 WeatherIconMapper.getIcon(daily.weatherCode[index]),
                 size: 32,
-                color: Colors.orangeAccent,
+                color: AppColors.orangeAccent,
               ),
               const SizedBox(width: 10),
 
@@ -69,7 +70,7 @@ class WeeklyList extends StatelessWidget {
                     AppText(
                       text: DateTimeHelper.formatDate(daily.date[index]),
                       fontSize: 12,
-                      color: Colors.grey.shade600,
+                      color: AppColors.grey,
                     ),
                   ],
                 ),
@@ -93,7 +94,7 @@ class WeeklyList extends StatelessWidget {
                         AppText(
                           text: "/ ${daily.minTemp[index].round()}°",
                           fontSize: 14,
-                          color: Colors.grey.shade600,
+                          color: AppColors.grey,
                         ),
                       ],
                     ),
@@ -107,13 +108,13 @@ class WeeklyList extends StatelessWidget {
                             Icon(
                               Icons.water_drop,
                               size: 12,
-                              color: Colors.blue.shade400,
+                              color: AppColors.blue,
                             ),
                             const SizedBox(width: 2),
                             AppText(
                               text: "${daily.rainProbability[index]}%",
                               fontSize: 11,
-                              color: Colors.blue.shade600,
+                              color: AppColors.blue,
                             ),
                           ],
                         ),

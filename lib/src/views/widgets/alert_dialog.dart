@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 
 class AppAlertDialog extends StatelessWidget {
   final String title;
@@ -25,18 +26,18 @@ class AppAlertDialog extends StatelessWidget {
       ),
       content: Text(
         content,
-        style: const TextStyle(fontSize: 14, color: Colors.black87),
+        style: const TextStyle(fontSize: 14, color: AppColors.black),
       ),
       actionsPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       actions: [
         TextButton(
           onPressed: () => context.pop(false),
-          child: Text(cancelText, style: const TextStyle(color: Colors.grey)),
+          child: Text(cancelText, style: const TextStyle(color: AppColors.grey)),
         ),
 
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
+            backgroundColor: AppColors.blue,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),

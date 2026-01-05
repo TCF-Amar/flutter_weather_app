@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/src/models/news_model.dart';
+import 'package:weather_app/src/views/widgets/app_scaffold.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
 class NewsScreen extends StatelessWidget {
@@ -9,101 +11,92 @@ class NewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('News'), centerTitle: true),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /// Hero Image
-              Hero(
-                tag: news.id,
-                child: Image.network(
-                  news.imageUrl,
-                  height: 250,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+    return AppScaffold(
+      title: 'News',
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// Hero Image
+            Hero(
+              tag: news.id,
+              child: Image.network(
+                news.imageUrl,
+                height: 250,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
+            ),
 
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppText(
-                      text: news.title,
-                      fontSize: 22,
-                      bold: true,
-                      color: Colors.black,
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppText(
+                    text: news.title,
+                    fontSize: 22,
+                    bold: true,
+                    color: AppColors.black,
+                  ),
+
+                  const SizedBox(height: 8),
+
+                  Row(
+                    children: [
+                      AppText(
+                        text: news.time,
+                        fontSize: 12,
+                        color: AppColors.grey,
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        'By ${news.author}',
+                        style: const TextStyle(color: AppColors.grey),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  /// Description
+                  Text(
+                    news.description,
+                    style: TextStyle(fontSize: 16, color: AppColors.black.withValues(alpha: 0.8)),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 16,
                     ),
-
-                    const SizedBox(height: 8),
-
-                    Row(
+                    decoration: BoxDecoration(
+                      color: AppColors.lightGrey,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AppText(
-                          text: news.time,
-                          fontSize: 12,
-                          color: Colors.grey,
-                        ),
+                        AppText(text: "News", fontSize: 16, color: AppColors.grey),
                         const SizedBox(width: 10),
-                        Text(
-                          'By ${news.author}',
-                          style: const TextStyle(color: Colors.grey),
+                        Row(
+                          children: [
+                            Icon(Icons.share, size: 20, color: AppColors.grey),
+                            const SizedBox(width: 10),
+                            AppText(
+                              text: "Share it",
+                              fontSize: 16,
+                              color: AppColors.grey,
+                            ),
+                          ],
                         ),
                       ],
                     ),
-
-                    const SizedBox(height: 16),
-
-                    /// Description
-                    Text(
-                      news.description,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 16),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          AppText(
-                            text: "News",
-                            fontSize: 16,
-                            color: Colors.grey,
-                          ),
-                          const SizedBox(width: 10),
-                          Row(
-                            children: [
-                              Icon(Icons.share, size: 20, color: Colors.grey),
-                              const SizedBox(width: 10),
-                              AppText(
-                                text: "Share it",
-                                fontSize: 16,
-                                color: Colors.grey,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
@@ -69,17 +70,17 @@ class SunConditionCard extends StatelessWidget {
             text: 'Sun condition',
             fontSize: 20,
             bold: true,
-            color: Colors.black,
+            color: AppColors.black,
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
+                  color: AppColors.black.withValues(alpha: 0.08),
                   blurRadius: 16,
                   offset: const Offset(0, 6),
                 ),
@@ -94,11 +95,11 @@ class SunConditionCard extends StatelessWidget {
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         AppText(
                           text: 'Conditions',
                           fontSize: 12,
-                          color: Colors.grey,
+                          color: AppColors.grey,
                         ),
                         SizedBox(height: 4),
                         AppText(text: 'Sun', fontSize: 16, bold: true),
@@ -111,7 +112,7 @@ class SunConditionCard extends StatelessWidget {
                         const AppText(
                           text: 'UV index',
                           fontSize: 12,
-                          color: Colors.grey,
+                          color: AppColors.grey,
                         ),
                         const SizedBox(height: 4),
                         AppText(
@@ -152,7 +153,7 @@ class SunConditionCard extends StatelessWidget {
                             bottom: 0,
                             left: 0,
                             right: 0,
-                            child: Container(height: 2, color: Colors.indigo),
+                            child: Container(height: 2, color: AppColors.indigo),
                           ),
                           // Sun icon - positioned dynamically
                           Positioned(
@@ -160,7 +161,7 @@ class SunConditionCard extends StatelessWidget {
                             bottom: 2,
                             child: const Icon(
                               Icons.wb_sunny_outlined,
-                              color: Colors.orange,
+                              color: AppColors.orange,
                               size: sunIconSize,
                             ),
                           ),
@@ -179,12 +180,12 @@ class SunConditionCard extends StatelessWidget {
                     AppText(
                       text: DateTimeHelper.formatTime(sunrise),
                       fontSize: 12,
-                      color: Colors.grey,
+                      color: AppColors.grey,
                     ),
                     AppText(
                       text: DateTimeHelper.formatTime(sunset),
                       fontSize: 12,
-                      color: Colors.grey,
+                      color: AppColors.grey,
                     ),
                   ],
                 ),

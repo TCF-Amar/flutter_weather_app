@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/src/controllers/splash_controller.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
@@ -44,8 +45,10 @@ class _SplashScreenState extends State<SplashScreen> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromARGB(255, 3, 62, 255),
-                  Color.fromARGB(255, 123, 167, 249),
+                  AppColors.grigent1,
+                  AppColors.grigent1,
+                  AppColors.grigent1,
+                  AppColors.grigent2,
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -58,10 +61,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   Icon(
                     Icons.cloud,
                     size: 100,
-                    color: Colors.white,
+                    color: AppColors.white,
                     shadows: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.5),
+                        color: AppColors.black.withValues(alpha: 0.5),
                         spreadRadius: 2,
                         blurRadius: 5,
                         offset: const Offset(0, 3),
@@ -73,20 +76,20 @@ class _SplashScreenState extends State<SplashScreen> {
                     text: 'Cloudy',
                     fontSize: 44,
                     bold: true,
-                    color: Colors.white,
+                    color: AppColors.white,
                   ),
                   const SizedBox(height: 10),
                   const AppText(
                     text: "Don't  worry, we'll get you \nthe weather you need",
                     fontSize: 20,
                     bold: true,
-                    color: Colors.white,
+                    color: AppColors.white,
                     textAlign: TextAlign.center,
                     maxLines: 2,
                   ),
                   const SizedBox(height: 40),
                   const CircularProgressIndicator(
-                    color: Colors.white,
+                    color: AppColors.white,
                     strokeWidth: 3,
                   ),
                   const SizedBox(height: 20),
@@ -94,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     () => AppText(
                       text: controller.statusMessage.value,
                       fontSize: 14,
-                      color: Colors.white70,
+                      color: AppColors.white.withValues(alpha: 0.7),
                     ),
                   ),
                 ],

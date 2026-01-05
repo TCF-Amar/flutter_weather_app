@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/src/views/widgets/animated_text.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 
 class AppScaffold extends StatelessWidget {
   /// The main content of the page
@@ -99,11 +100,14 @@ class AppScaffold extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: appBarColor ?? AppColors.transparent,
       centerTitle: centerTitle,
       leading: showBackButton
           ? IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new),
+              icon: const Icon(
+                Icons.arrow_back_ios_new,
+                color: AppColors.textPrimary,
+              ),
               onPressed:
                   onBackPressed ??
                   () {
@@ -114,12 +118,15 @@ class AppScaffold extends StatelessWidget {
             )
           : isDrawerOpen
           ? IconButton(
-              icon: const Icon(Icons.close),
+              icon: const Icon(Icons.close, color: AppColors.textPrimary),
               onPressed: () {
                 onMenuTab!();
               },
             )
-          : IconButton(icon: const Icon(Icons.menu), onPressed: onMenuTab),
+          : IconButton(
+              icon: const Icon(Icons.menu, color: AppColors.textPrimary),
+              onPressed: onMenuTab,
+            ),
       title: _buildTitle(),
       actions: actions,
     );
@@ -141,7 +148,7 @@ class AppScaffold extends StatelessWidget {
       return AnimatedText(
         text: title!,
         fontSize: titleFontSize,
-        color: titleColor ?? Colors.black,
+        color: titleColor ?? AppColors.textLight,
         fontWeight: FontWeight.bold,
       );
     }

@@ -11,6 +11,7 @@ import 'package:weather_app/src/views/widgets/alert_dialog.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
 import 'package:weather_app/src/controllers/settings_controller.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 
 class SavedLocationTile extends StatefulWidget {
   final PlaceModel place;
@@ -81,16 +82,16 @@ class SavedLocationTileState extends State<SavedLocationTile> {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.only(right: 15),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.2),
+        color: AppColors.textLight.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: ListTile(
-        leading: const Icon(Icons.location_on, color: Colors.white),
+        leading: const Icon(Icons.location_on, color: AppColors.textLight),
         title: AppText(
           text: widget.place.name,
           fontSize: 16,
           bold: true,
-          color: Colors.white,
+          color: AppColors.textLight,
         ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +99,7 @@ class SavedLocationTileState extends State<SavedLocationTile> {
             AppText(
               text: widget.place.displayName,
               fontSize: 12,
-              color: Colors.white70,
+              color: AppColors.textLight.withValues(alpha: 0.7),
             ),
             if (_isLoading)
               const SizedBox(
@@ -106,7 +107,7 @@ class SavedLocationTileState extends State<SavedLocationTile> {
                 width: 12,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  color: Colors.white,
+                  color: AppColors.textLight,
                 ),
               )
             else if (_weather != null)
@@ -115,7 +116,7 @@ class SavedLocationTileState extends State<SavedLocationTile> {
                   Icon(
                     WeatherIconMapper.getIcon(_weather!.current.weatherCode),
                     size: 16,
-                    color: Colors.white,
+                    color: AppColors.textLight,
                   ),
                   const SizedBox(width: 4),
                   Obx(
@@ -124,7 +125,7 @@ class SavedLocationTileState extends State<SavedLocationTile> {
                         _weather!.current.temperature,
                       ),
                       fontSize: 12,
-                      color: Colors.white,
+                      color: AppColors.textLight,
                     ),
                   ),
                 ],
@@ -132,7 +133,7 @@ class SavedLocationTileState extends State<SavedLocationTile> {
           ],
         ),
         trailing: IconButton(
-          icon: const Icon(Icons.close, color: Colors.white, size: 20),
+          icon: const Icon(Icons.close, color: AppColors.textLight, size: 20),
           onPressed: () async {
             final bool? res = await showDialog(
               context: context,

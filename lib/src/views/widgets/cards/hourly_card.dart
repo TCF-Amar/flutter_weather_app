@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/models/weather_model.dart';
@@ -43,7 +44,7 @@ class HourlyForecastCard extends StatelessWidget {
           const AppText(
             text: 'Hourly Forecast',
             bold: true,
-            color: Colors.black,
+            color: AppColors.black,
             fontSize: 20,
           ),
 
@@ -53,11 +54,11 @@ class HourlyForecastCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(22),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
+                  color: AppColors.black.withValues(alpha: 0.08),
                   blurRadius: 14,
                   offset: const Offset(0, 6),
                 ),
@@ -72,7 +73,7 @@ class HourlyForecastCard extends StatelessWidget {
                     hourly.weatherCode[startIndex],
                   ),
                   fontSize: 14,
-                  color: Colors.grey,
+                  color: AppColors.grey,
                 ),
 
                 const SizedBox(height: 4),
