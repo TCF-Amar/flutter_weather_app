@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ],
 
-      drawer: AppDrawer(onMenuTap: onMenuTap),
+      drawer: AppDrawer(onMenuTap: onMenuTap, weather: weatherController.weather.value),
       body: SafeArea(
         child: Obx(() {
           switch (locationController.status.value) {

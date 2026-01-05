@@ -99,7 +99,7 @@ class AppScaffold extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: appBarColor,
+      backgroundColor: Colors.transparent,
       centerTitle: centerTitle,
       leading: showBackButton
           ? IconButton(

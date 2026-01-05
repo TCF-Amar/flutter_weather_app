@@ -2,8 +2,10 @@ import 'package:go_router/go_router.dart';
 import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/models/news_model.dart';
 import 'package:weather_app/src/models/place_model.dart';
+import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/screens/details_screen.dart';
 import 'package:weather_app/src/views/screens/home_wrapper.dart';
+import 'package:weather_app/src/views/screens/my_location.dart';
 import 'package:weather_app/src/views/screens/news_screen.dart';
 import 'package:weather_app/src/views/screens/search_screen.dart';
 import 'package:weather_app/src/views/screens/splash_screen.dart';
@@ -51,6 +53,14 @@ class AppRoute {
         path: RouteName.settings.path,
         name: RouteName.settings.name,
         builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: RouteName.myLocations.path,
+        name: RouteName.myLocations.name,
+        builder: (context, state) {
+
+         return   MyLocationsScreen();
+        }
       ),
     ],
   );

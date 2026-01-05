@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/controllers/place_controller.dart';
 import 'package:weather_app/src/controllers/saved_locations_controller.dart';
 import 'package:weather_app/src/controllers/settings_controller.dart';
+import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/animated_text.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 import 'package:weather_app/src/views/widgets/tiles/saved_location_tile.dart';
 
 class AppDrawer extends StatelessWidget {
   final VoidCallback onMenuTap;
-
-  AppDrawer({super.key, required this.onMenuTap});
+  final WeatherModel? weather;
+  AppDrawer({super.key, required this.onMenuTap, this.weather});
 
   final SettingsController settingsController = Get.find();
   final PlaceController placeController = Get.find();
@@ -48,6 +50,11 @@ class AppDrawer extends StatelessWidget {
 
                 GestureDetector(
                   onTap: () {
+                    context.pushNamed(
+                      RouteName.myLocations.name,
+                      extra: weather,
+                    );
+                    // Just close the drawer when tapping current location
                     onMenuTap();
                   },
                   child: Row(
@@ -58,7 +65,8 @@ class AppDrawer extends StatelessWidget {
                         child: Obx(
                           () => AnimatedText(
                             text:
-                                placeController.currentPlace.value?.name ??
+                                placeController.currentPlace.value?.displayName
+                                    .split(',')[1] ??
                                 'Unknown',
                             fontSize: 18,
                             color: Colors.white,
@@ -74,7 +82,7 @@ class AppDrawer extends StatelessWidget {
                 /// Add location
                 GestureDetector(
                   onTap: () {
-                    onMenuTap();
+                    // onMenuTap();
 
                     ///
                     context.pushNamed(
@@ -153,7 +161,10 @@ class AppDrawer extends StatelessWidget {
                   context,
                   title: 'Share this app',
                   onTap: () {
-                    onMenuTap();
+                    // onMenuTap();
+                    SharePlus.instance.share(
+                      ShareParams(text: 'Share this app'),
+                    );
                   },
                 ),
                 const SizedBox(height: 16),
