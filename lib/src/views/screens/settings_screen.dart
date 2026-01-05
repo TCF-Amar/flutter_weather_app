@@ -94,7 +94,10 @@ class SettingsScreen extends StatelessWidget {
                   title: "Share app",
                   onTap: () {
                     SharePlus.instance.share(
-                      ShareParams(text: 'Share this app'),
+                      ShareParams(
+                        text:
+                            'https://github.com/TCF-Amar/flutter_weather_app.git',
+                      ),
                     );
                   },
                 ),
