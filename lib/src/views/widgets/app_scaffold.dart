@@ -4,60 +4,24 @@ import 'package:weather_app/src/views/widgets/animated_text.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 
 class AppScaffold extends StatelessWidget {
-  /// The main content of the page
   final Widget body;
-
-  /// Title text for the app bar
   final String? title;
-
-  /// Custom title widget (overrides title text)
   final Widget? titleWidget;
-
-  /// Whether to show the back button
   final bool showBackButton;
-
-  /// Custom back button action
   final VoidCallback? onBackPressed;
-
-  /// Actions to display in the app bar
   final List<Widget>? actions;
-
-  /// Whether to center the title
   final bool centerTitle;
-
-  /// Background color of the scaffold
   final Color? backgroundColor;
-
-  /// App bar background color
   final Color? appBarColor;
-
-  /// Whether to use animated text for title
   final bool useAnimatedTitle;
-
-  /// Font size for the title
   final double titleFontSize;
-
-  /// Title text color
   final Color? titleColor;
-
-  /// Whether to show the app bar
   final bool showAppBar;
-
-  /// Custom app bar (overrides all app bar settings)
   final PreferredSizeWidget? customAppBar;
-
-  /// Floating action button
   final Widget? floatingActionButton;
-
-  /// Bottom navigation bar
   final Widget? bottomNavigationBar;
-
-  /// Drawer
   final Widget? drawer;
-
-  /// End drawer
   final Widget? endDrawer;
-
   final VoidCallback? onMenuTab;
   final bool isDrawerOpen;
 
@@ -133,7 +97,6 @@ class AppScaffold extends StatelessWidget {
   }
 
   Widget? _buildTitle() {
-    // Custom title widget takes precedence
     if (titleWidget != null) {
       return titleWidget;
     }

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/core/utils/location_helper.dart';

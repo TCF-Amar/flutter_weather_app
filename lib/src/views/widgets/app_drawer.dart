@@ -166,7 +166,10 @@ class AppDrawer extends StatelessWidget {
                   onTap: () {
                     // onMenuTap();
                     SharePlus.instance.share(
-                      ShareParams(text: 'Share this app'),
+                      ShareParams(
+                        text:
+                            'https://github.com/TCF-Amar/flutter_weather_app.git',
+                      ),
                     );
                   },
                 ),
