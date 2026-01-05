@@ -7,6 +7,7 @@ import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/controllers/saved_locations_controller.dart';
 import 'package:weather_app/src/models/place_model.dart';
 import 'package:weather_app/src/models/weather_model.dart';
+import 'package:weather_app/src/views/widgets/alert_dialog.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
 import 'package:weather_app/src/controllers/settings_controller.dart';
@@ -133,7 +134,22 @@ class SavedLocationTileState extends State<SavedLocationTile> {
         trailing: IconButton(
           icon: const Icon(Icons.close, color: Colors.white, size: 20),
           onPressed: () async {
-            await savedLocationsController.removeLocation(widget.place);
+            final bool? res = await showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return AppAlertDialog(
+                  title: 'Remove Location',
+                  content: 'Are you sure you want to remove this location?',
+                  cancelText: 'Cancel',
+                  okText: 'Remove',
+                );
+              },
+            );
+
+            if (res == true) {
+              await savedLocationsController.removeLocation(widget.place);
+            }
           },
         ),
         onTap: () {
