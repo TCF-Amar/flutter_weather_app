@@ -52,7 +52,7 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: Colors.white,
       appBar: customAppBar ?? (showAppBar ? _buildAppBar(context) : null),
       body: body,
       floatingActionButton: floatingActionButton,
@@ -64,7 +64,16 @@ class AppScaffold extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: appBarColor ?? AppColors.transparent,
+      backgroundColor: Colors.white,
+      elevation: 0,
+      surfaceTintColor: Colors.transparent,
+      titleSpacing: 0,
+
+      // systemOverlayStyle: SystemUiOverlayStyle(
+      //   statusBarColor: Colors.transparent,
+      //   statusBarIconBrightness: Brightness.light,
+      // ),
+      scrolledUnderElevation: 0,
       centerTitle: centerTitle,
       leading: showBackButton
           ? IconButton(

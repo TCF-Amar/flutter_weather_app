@@ -26,15 +26,15 @@ class ShareOptionsSheet extends StatelessWidget {
     final humidity = weather.current.humidity;
 
     return '''
-📍 Location: $location
-🌡️ Temperature: $temp°C
-☁️ Conditions: $condition
-💨 Wind: $wind km/h
-💧 Humidity: $humidity%
+      📍 Location: $location
+      🌡️ Temperature: $temp°C
+      ☁️ Conditions: $condition
+      💨 Wind: $wind km/h
+      💧 Humidity: $humidity%
 
-Shared from Weather App
-''';
-  }
+      Shared from Weather App
+      ''';
+  } 
 
   /// Share via native share sheet
   void _shareViaApps(BuildContext context) {
@@ -50,6 +50,7 @@ Shared from Weather App
     Navigator.pop(context);
 
     // Show snackbar
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Weather info copied to clipboard'),

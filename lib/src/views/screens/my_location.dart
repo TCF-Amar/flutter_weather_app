@@ -56,7 +56,7 @@ class MyLocationsScreen extends StatelessWidget {
                       Icon(
                         WeatherIconMapper.getIcon(weather.current.weatherCode),
                         size: 50,
-                        color: AppColors.orange,
+                        color: AppColors.white,
                       ),
                       SizedBox(width: 20),
 

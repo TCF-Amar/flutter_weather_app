@@ -33,15 +33,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Weather App',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
       darkTheme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       routeInformationParser: AppRoute.router.routeInformationParser,
       routerDelegate: AppRoute.router.routerDelegate,
