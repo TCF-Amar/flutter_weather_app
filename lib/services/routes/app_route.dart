@@ -7,6 +7,7 @@ import 'package:weather_app/src/views/screens/home_wrapar.dart';
 import 'package:weather_app/src/views/screens/news_screen.dart';
 import 'package:weather_app/src/views/screens/search_screen.dart';
 import 'package:weather_app/src/views/screens/splash_screen.dart';
+import 'package:weather_app/src/views/screens/settings_screen.dart';
 
 class AppRoute {
   static final GoRouter router = GoRouter(
@@ -45,6 +46,11 @@ class AppRoute {
         builder: (context, state) {
           return NewsScreen(news: state.extra as NewsModel);
         },
+      ),
+      GoRoute(
+        path: RouteName.settings.path,
+        name: RouteName.settings.name,
+        builder: (context, state) => const SettingsScreen(),
       ),
     ],
   );

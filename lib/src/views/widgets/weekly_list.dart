@@ -12,17 +12,8 @@ class WeeklyList extends StatelessWidget {
   String _getDayLabel(String date) {
     try {
       final parsedDate = DateTime.parse(date);
-      final today = DateTime.now();
-      final todayDate = DateTime(today.year, today.month, today.day);
-      final dateOnly = DateTime(parsedDate.year, parsedDate.month, parsedDate.day);
-      
-      // if (dateOnly == todayDate) {
-      //   return 'Today';
-      // } else if (dateOnly == todayDate.add(const Duration(days: 1))) {
-      //   return 'Tomorrow';
-      // } else {
-        return DateFormat('EEEE').format(parsedDate);
-      // }
+
+      return DateFormat('EEEE').format(parsedDate);
     } catch (e) {
       return DateFormat('EEEE').format(DateTime.parse(date));
     }
@@ -52,10 +43,10 @@ class WeeklyList extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: indexes.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 12),
+      separatorBuilder: (_, _) => const SizedBox(height: 12),
       itemBuilder: (context, i) {
         final index = indexes[i];
-        
+
         // Validate index bounds
         if (index >= daily.date.length ||
             index >= daily.weatherCode.length ||
@@ -71,18 +62,18 @@ class WeeklyList extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             // border: Border.all(color: Colors.grey.shade200, width: 1),
           ),
-          child: Row(
+          child: Column(
             children: [
-
               ///  Icon
               Center(
-                  child: Icon(
-                    WeatherIconMapper.getIcon(daily.weatherCode[index]),
-                    size: 32,
-                    color: Colors.orangeAccent,
-                  ),
+                child: Icon(
+                  WeatherIconMapper.getIcon(daily.weatherCode[index]),
+                  size: 32,
+                  color: Colors.orangeAccent,
+                ),
+              ),
+              SizedBox(width: 10),
 
-              ), SizedBox(width: 10,),
               ///  Day + Date
               Expanded(
                 flex: 3,
@@ -103,8 +94,6 @@ class WeeklyList extends StatelessWidget {
                   ],
                 ),
               ),
-
-
 
               ///  Temp + Rain probability
               Expanded(

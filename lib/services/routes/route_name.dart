@@ -6,4 +6,5 @@ class RouteName {
   static final details = RouteModel(name: "details", path: "/details");
   static final search = RouteModel(name: "search", path: "/search");
   static final news = RouteModel(name: "news", path: "/news");
+  static final settings = RouteModel(name: "settings", path: "/settings");
 }

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/controllers/place_controller.dart';
 import 'package:weather_app/src/controllers/saved_locations_controller.dart';
+import 'package:weather_app/src/controllers/settings_controller.dart';
 import 'package:weather_app/src/views/widgets/animated_text.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 import 'package:weather_app/src/views/widgets/saved_locatio_tile.dart';
@@ -13,6 +14,7 @@ class AppDrawer extends StatelessWidget {
 
   AppDrawer({super.key, required this.onMenuTap});
 
+  final SettingsController settingsController = Get.find();
   final PlaceController placeController = Get.find();
   final SavedLocationsController savedLocationsController = Get.find();
 
@@ -73,13 +75,12 @@ class AppDrawer extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     onMenuTap();
-                    Future.delayed(const Duration(milliseconds: 100), () {
-                      ///
-                      context.pushNamed(
-                        RouteName.search.name,
-                        queryParameters: {'title': 'Add Location'},
-                      );
-                    });
+
+                    ///
+                    context.pushNamed(
+                      RouteName.search.name,
+                      queryParameters: {'title': 'Add Location'},
+                    );
                   },
                   child: Row(
                     children: const [
@@ -144,6 +145,7 @@ class AppDrawer extends StatelessWidget {
                   title: 'Settings',
                   onTap: () {
                     onMenuTap();
+                    context.pushNamed(RouteName.settings.name);
                   },
                 ),
                 const SizedBox(height: 16),

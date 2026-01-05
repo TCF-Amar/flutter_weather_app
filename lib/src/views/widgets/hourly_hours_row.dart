@@ -3,6 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
+import 'package:get/get.dart';
+import 'package:weather_app/src/controllers/settings_controller.dart';
+
 class HourlyHoursRow extends StatelessWidget {
   final List<String> times;
   final List<int> weatherCodes;
@@ -11,7 +14,7 @@ class HourlyHoursRow extends StatelessWidget {
   final int startIndex;
   final int itemCount;
 
-  const HourlyHoursRow({
+  HourlyHoursRow({
     super.key,
     required this.times,
     required this.weatherCodes,
@@ -20,6 +23,8 @@ class HourlyHoursRow extends StatelessWidget {
     required this.startIndex,
     required this.itemCount,
   });
+
+  final SettingsController settingsController = Get.find();
 
   String _formatHour(String time) {
     try {
@@ -68,7 +73,7 @@ class HourlyHoursRow extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: safeItemCount,
-        separatorBuilder: (_, __) => const SizedBox(width: 20),
+        separatorBuilder: (_, _) => const SizedBox(width: 20),
         itemBuilder: (context, i) {
           final index = startIndex + i;
           
@@ -105,10 +110,14 @@ class HourlyHoursRow extends StatelessWidget {
               const SizedBox(height: 8),
 
               /// Temperature
-              AppText(
-                text: "${isNow ? currentTemperature : temperatures[index]}°C",
-                fontSize: 14,
-                bold: true,
+              Obx(
+                () => AppText(
+                  text: settingsController.formatTemperature(
+                    isNow ? currentTemperature : temperatures[index],
+                  ),
+                  fontSize: 14,
+                  bold: true,
+                ),
               ),
             ],
           );

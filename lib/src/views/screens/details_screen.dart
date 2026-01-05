@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
-import 'package:weather_app/services/api/weather_api.dart';
 import 'package:weather_app/src/controllers/details_controller.dart';
 import 'package:weather_app/src/controllers/saved_locations_controller.dart';
 import 'package:weather_app/src/models/place_model.dart';

@@ -38,7 +38,7 @@ class SearchScreen extends StatelessWidget {
                     focusedBorder: InputBorder.none,
                     enabledBorder: InputBorder.none,
 
-                    labelText: 'Search',
+                    // labelText: 'Search',
                     hintText: 'Search city name',
                     prefixIcon: const Icon(Icons.search),
 

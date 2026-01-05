@@ -143,7 +143,7 @@ class _WeatherView extends StatelessWidget {
     description:
         'In a bold new visual release that is rapidly gaining attention across creative circles, a striking close-up portrait has emerged as a textbook example of how the focal point can transform an image’s impact. The image places the subject’s eyes and facial features at the heart of the frame, drawing the viewer’s attention instantly to the most expressive elements of the composition. This technique—long underscored by photography and design experts as the key to compelling visuals—makes use of sharp focus, contrast, and natural lighting to guide the viewer’s gaze to precisely where the creator intends. Experts say this approach aligns perfectly with fundamental principles of visual hierarchy and image composition, where a clear focal point not only captivates but also tells a nuanced story about the subject and mood.',
     imageUrl:
-        'https://ix-marketing.imgix.net/focalpoint.png?auto=format,compress&w=1946',
+        'https://images.unsplash.com/photo-1767304590980-9c075c875c38?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
     author: 'John Doe',
     time: '14 min ago',
   );
@@ -186,8 +186,8 @@ class _WeatherView extends StatelessWidget {
           children: [
             MainCard(weather: weather),
             HourlyForecastCard(weather: weather),
-            WeeklyForecastCard(weather: weather),
-            // SevenDayForecast(weather: weather),
+            // WeeklyForecastCard(weather: weather),
+            SevenDayForecast(weather: weather),
             SunConditionCard(weather: weather),
             WindPressureCard(
               windSpeed: weather.current.windSpeed,

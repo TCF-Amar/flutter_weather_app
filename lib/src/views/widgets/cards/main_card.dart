@@ -6,10 +6,15 @@ import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
+import 'package:get/get.dart';
+import 'package:weather_app/src/controllers/settings_controller.dart';
+
 class MainCard extends StatelessWidget {
   final WeatherModel weather;
 
-  const MainCard({super.key, required this.weather});
+  MainCard({super.key, required this.weather});
+
+  final SettingsController settingsController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -91,16 +96,24 @@ class MainCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppText(
-                  text: "${weather.current.temperature}°C",
-                  fontSize: 30,
-                  bold: true,
-                  color: Colors.white,
+                Obx(
+                  () => AppText(
+                    text: settingsController.formatTemperature(
+                      weather.current.temperature,
+                    ),
+                    fontSize: 30,
+                    bold: true,
+                    color: Colors.white,
+                  ),
                 ),
 
-                _infoItem(
-                  'assets/images/Vector (2).svg',
-                  "${weather.current.windSpeed} km/h",
+                Obx(
+                  () => _infoItem(
+                    'assets/images/Vector (2).svg',
+                    settingsController.formatWindSpeed(
+                      weather.current.windSpeed,
+                    ),
+                  ),
                 ),
 
                 _infoItem(

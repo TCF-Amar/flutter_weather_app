@@ -9,10 +9,12 @@ import 'package:weather_app/src/models/place_model.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
+import 'package:weather_app/src/controllers/settings_controller.dart';
+
 class SavedLocationTile extends StatefulWidget {
   final PlaceModel place;
 
-  const SavedLocationTile({required this.place});
+  const SavedLocationTile({super.key, required this.place});
 
   @override
   State<SavedLocationTile> createState() => SavedLocationTileState();
@@ -21,6 +23,7 @@ class SavedLocationTile extends StatefulWidget {
 class SavedLocationTileState extends State<SavedLocationTile> {
   WeatherModel? _weather;
   bool _isLoading = false;
+  final SettingsController settingsController = Get.find();
 
   @override
   void initState() {
@@ -114,11 +117,14 @@ class SavedLocationTileState extends State<SavedLocationTile> {
                     color: Colors.white,
                   ),
                   const SizedBox(width: 4),
-                  AppText(
-                    text:
-                        '${_weather!.current.temperature.toStringAsFixed(0)}°C',
-                    fontSize: 12,
-                    color: Colors.white,
+                  Obx(
+                    () => AppText(
+                      text: settingsController.formatTemperature(
+                        _weather!.current.temperature,
+                      ),
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),

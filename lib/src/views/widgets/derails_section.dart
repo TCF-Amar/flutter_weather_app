@@ -3,16 +3,22 @@ import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
+import 'package:get/get.dart';
+import 'package:weather_app/src/controllers/settings_controller.dart';
+
 class DetailsSection extends StatelessWidget {
   final WeatherModel weather;
-  const DetailsSection(this.weather, {super.key});
+  DetailsSection(this.weather, {super.key});
+
+  final SettingsController settingsController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     /// Safe access to UV Index - use first value if available, otherwise show N/A
-    final uvIndexValue = weather.daily.uvIndex.isNotEmpty
-        ? weather.daily.uvIndex[0].toStringAsFixed(1)
-        : "N/A";
+    final uvIndexValue =
+        weather.daily.uvIndex.isNotEmpty
+            ? weather.daily.uvIndex[0].toStringAsFixed(1)
+            : "N/A";
 
     return Expanded(
       child: GridView.count(
@@ -21,9 +27,13 @@ class DetailsSection extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         childAspectRatio: 1.5,
         children: [
-          _DetailsCard(
-            title: "Temperature",
-            value: "${weather.current.temperature} °C",
+          Obx(
+            () => _DetailsCard(
+              title: "Temperature",
+              value: settingsController.formatTemperature(
+                weather.current.temperature,
+              ),
+            ),
           ),
           _DetailsCard(
             title: "Humidity",
@@ -64,6 +74,9 @@ class _DetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0,
+      color: Colors.white.withValues(alpha: 0.1),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Row(
@@ -73,11 +86,21 @@ class _DetailsCard extends StatelessWidget {
             SvgPicture.asset(_getIconPath(title), height: 34, width: 34),
             const SizedBox(width: 8),
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 8),
-                AppText(text: title, fontSize: 14, bold: false),
+                AppText(
+                  text: title,
+                  fontSize: 14,
+                  bold: false,
+                  color: Colors.white70,
+                ),
                 const SizedBox(height: 4),
-                AppText(text: value, fontSize: 18, bold: true),
+                AppText(
+                  text: value,
+                  fontSize: 18,
+                  bold: true,
+                  color: Colors.white,
+                ),
               ],
             ),
           ],
