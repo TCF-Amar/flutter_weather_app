@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
@@ -66,23 +67,25 @@ class SunConditionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// HEADER
-          const AppText(
+          AppText(
             text: 'Sun condition',
             fontSize: 20,
             bold: true,
-            color: AppColors.black,
+            color: context.textColor,
           ),
           Container(
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: context.isDark
+                  ? context.onBackground.withOpacity(0.01)
+                  : context.surface,
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.black.withValues(alpha: 0.08),
-                  blurRadius: 16,
-                  offset: const Offset(0, 6),
+                  color: context.shadowColor,
+                  blurRadius: 1,
+                  offset: const Offset(0, 1),
                 ),
               ],
             ),
@@ -127,7 +130,7 @@ class SunConditionCard extends StatelessWidget {
 
                 const SizedBox(height: 24),
 
-                /// 🔹 Sun path
+                ///  Sun path
                 SizedBox(
                   height: 30,
                   child: LayoutBuilder(
@@ -153,7 +156,10 @@ class SunConditionCard extends StatelessWidget {
                             bottom: 0,
                             left: 0,
                             right: 0,
-                            child: Container(height: 2, color: AppColors.indigo),
+                            child: Container(
+                              height: 2,
+                              color: AppColors.indigo,
+                            ),
                           ),
                           // Sun icon - positioned dynamically
                           Positioned(
@@ -173,7 +179,7 @@ class SunConditionCard extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                /// 🔹 Sunrise / Sunset
+                ///  Sunrise / Sunset
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

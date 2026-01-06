@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/src/controllers/search_controller.dart';
 import 'package:weather_app/src/views/widgets/app_scaffold.dart';
 import 'package:weather_app/src/views/widgets/tiles/search_result_tile.dart';
@@ -17,8 +18,8 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       title: title,
-      titleColor: AppColors.textPrimary,
 
+      // titleColor: AppColors.textPrimary,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -26,19 +27,19 @@ class SearchScreen extends StatelessWidget {
             ///  Search Field
             Container(
               decoration: BoxDecoration(
-                color: AppColors.background,
+                color: context.onBackground.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Obx(
                 () => TextFormField(
                   controller: queryController,
-                  style: const TextStyle(fontSize: 16, color: AppColors.black),
+                  style: TextStyle(fontSize: 16, color: context.onBackground),
 
                   decoration: InputDecoration(
                     /// border transparent
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
+                    // enabledBorder: Br,
 
                     // labelText: 'Search',
                     hintText: 'Search city name',
@@ -46,9 +47,9 @@ class SearchScreen extends StatelessWidget {
 
                     suffixIcon: controller.currentQuery.isNotEmpty
                         ? IconButton(
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.clear,
-                              color: AppColors.grey,
+                              color: context.onBackground,
                             ),
                             onPressed: () {
                               queryController.clear();
@@ -84,7 +85,13 @@ class SearchScreen extends StatelessWidget {
                   itemCount: controller.places.length,
                   itemBuilder: (context, index) {
                     final place = controller.places[index];
-                    return SearchResultTile(place: place);
+                    return SearchResultTile(
+                      place: place,
+                      onTap: () {
+                        controller.currentQuery = '';
+                        queryController.clear();
+                      },
+                    );
                   },
                 );
               }),

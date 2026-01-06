@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/controllers/location_controller.dart';
 import 'package:weather_app/src/controllers/place_controller.dart';
@@ -33,12 +32,13 @@ class HomeScreen extends StatelessWidget {
           text: weather?.place?.name.split(',')[1] ?? 'Weather',
           fontSize: 24,
           fontWeight: FontWeight.bold,
+          
         );
       }),
 
       actions: [
         IconButton(
-          icon: const Icon(Icons.search, color: AppColors.textPrimary),
+          icon: const Icon(Icons.search),
           onPressed: () {
             context.pushNamed(
               RouteName.search.name,

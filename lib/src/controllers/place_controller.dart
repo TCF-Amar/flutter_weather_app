@@ -62,7 +62,6 @@ class PlaceController extends GetxController {
   void setSelectedPlace(PlaceModel place) {
     currentPlace.value = place;
 
-    /// IMPORTANT: WeatherController ko trigger karega
     locationController.latitude.value = place.lat;
     locationController.longitude.value = place.lon;
   }

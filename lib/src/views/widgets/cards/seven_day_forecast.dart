@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/models/weather_model.dart';
@@ -17,7 +17,7 @@ class SevenDayForecast extends StatelessWidget {
 
     /// Validation
     if (daily.date.isEmpty) {
-      return _emptyState();
+      return _emptyState(context);
     }
 
     final today = DateTime.now();
@@ -41,7 +41,7 @@ class SevenDayForecast extends StatelessWidget {
     final forecastIndexes = futureIndexes.take(7).toList();
 
     if (forecastIndexes.isEmpty) {
-      return _emptyState();
+      return _emptyState(context);
     }
 
     return Container(
@@ -54,13 +54,15 @@ class SevenDayForecast extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(top: 20, bottom: 10),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: context.isDark
+                  ? context.onBackground.withOpacity(0.01)
+                  : context.surface,
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.black.withValues(alpha: 0.06),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8),
+                  color: context.shadowColor,
+                  blurRadius: 1,
+                  offset: const Offset(0, 1),
                 ),
               ],
             ),
@@ -79,7 +81,7 @@ class SevenDayForecast extends StatelessWidget {
                               weather.current.weatherCode,
                             ),
                             fontSize: 16,
-                            color: AppColors.grey,
+                            color: context.onBackground,
                           ),
                           const SizedBox(height: 4),
                           AppText(
@@ -109,16 +111,16 @@ class SevenDayForecast extends StatelessWidget {
   }
 
   /// 🔹 Empty UI
-  Widget _emptyState() {
+  Widget _emptyState(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.surface,
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: AppColors.black.withValues(alpha: 0.06),
+            color: context.shadowColor,
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),

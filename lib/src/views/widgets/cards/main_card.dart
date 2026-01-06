@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/models/weather_model.dart';
@@ -31,16 +32,16 @@ class MainCard extends StatelessWidget {
         height: 200,
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             begin: Alignment.centerLeft,
-            colors: [AppColors.grigent1, AppColors.grigent2],
+            colors: [context.gradient1, context.gradient2],
           ),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// ───────── Top Row ─────────
+            ///  Top Row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -72,7 +73,7 @@ class MainCard extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            /// ───────── Location ─────────
+            ///  Location 
             Row(
               children: [
                 const Icon(Icons.location_on, color: AppColors.white),
@@ -90,7 +91,7 @@ class MainCard extends StatelessWidget {
 
             const Spacer(),
 
-            /// ───────── Bottom Info ─────────
+            ///  Bottom Info 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -126,7 +127,7 @@ class MainCard extends StatelessWidget {
     );
   }
 
-  /// ───────── Reusable Info Item ─────────
+  ///  Reusable Info Item 
   Widget _infoItem(String asset, String text) {
     return Row(
       children: [

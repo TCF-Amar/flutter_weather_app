@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 class DateTimeHelper {
   DateTimeHelper._();
 
-  /// 🔹 Internal parser (SAFE for ISO strings)
+  /// Internal parser (SAFE for ISO strings)
   static DateTime _parse(String value) {
     return DateTime.parse(value);
   }

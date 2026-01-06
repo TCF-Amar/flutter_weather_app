@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 
 class AppText extends StatelessWidget {
   final String text;
@@ -7,11 +8,12 @@ class AppText extends StatelessWidget {
   final double? fontSize;
   final TextAlign? textAlign;
   final int? maxLines;
+
   const AppText({
     super.key,
-   required this.text,
+    required this.text,
     this.bold = false,
-    this.color = const Color.fromARGB(221, 47, 47, 47),
+    this.color, 
     this.fontSize = 16,
     this.textAlign = TextAlign.start,
     this.maxLines = 1,
@@ -24,7 +26,8 @@ class AppText extends StatelessWidget {
       maxLines: maxLines,
       textAlign: textAlign,
       style: TextStyle(
-        color: color,
+        color:
+            color ?? context.onBackground, 
         fontSize: fontSize,
         fontWeight: bold ? FontWeight.bold : FontWeight.normal,
       ),

@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:weather_app/core/errors/dio_failure_mapper.dart';
 import 'package:weather_app/core/errors/failure.dart';
-import 'package:weather_app/core/network/dio_client.dart';
+import 'package:weather_app/core/network/api_helper.dart';
 import 'package:weather_app/src/models/place_model.dart';
 
 class PlaceToLatLon {
@@ -10,8 +10,9 @@ class PlaceToLatLon {
     String query,
   ) async {
     try {
-      final response = await DioClient.placeToLatLonDio.get(
-        '/search',
+      final response = await ApiHelper.placeToLatLonApiRequest(
+        url: '/search',
+        method: ApiMethod.GET,
         queryParameters: {'name': query},
       );
 
@@ -20,7 +21,7 @@ class PlaceToLatLon {
       }
 
       final data = response.data as Map<String, dynamic>;
-      
+
       if (data['results'] == null || data['results'] is! List<dynamic>) {
         return Left(Failure('Place data not available'));
       }

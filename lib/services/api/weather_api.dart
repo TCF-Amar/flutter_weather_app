@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:weather_app/core/errors/dio_failure_mapper.dart';
 import 'package:weather_app/core/errors/failure.dart';
-import 'package:weather_app/core/network/dio_client.dart';
+import 'package:weather_app/core/network/api_helper.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 
 class WeatherApi {
@@ -13,8 +13,9 @@ class WeatherApi {
     required double lon,
   }) async {
     try {
-      final Response response = await DioClient.weatherDio.get(
-        '/forecast',
+      final Response response = await ApiHelper.weatherApiRequest(
+        url: '/forecast',
+        method: ApiMethod.GET,
         queryParameters: {
           'latitude': lat,
           'longitude': lon,

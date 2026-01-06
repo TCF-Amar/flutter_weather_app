@@ -3,7 +3,7 @@ import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
 import 'package:get/get.dart';
-import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/src/controllers/settings_controller.dart';
 
 class DetailsGrid extends StatelessWidget {
@@ -14,10 +14,9 @@ class DetailsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final uvIndexValue =
-        weather.daily.uvIndex.isNotEmpty
-            ? weather.daily.uvIndex[0].toStringAsFixed(1)
-            : "N/A";
+    final uvIndexValue = weather.daily.uvIndex.isNotEmpty
+        ? weather.daily.uvIndex[0].toStringAsFixed(1)
+        : "N/A";
 
     return GridView.count(
       crossAxisCount: 2,
@@ -56,7 +55,7 @@ class _DetailsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      color: AppColors.white.withValues(alpha: 0.5),
+      color: context.surface.withValues(alpha: 0.5),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -67,14 +66,18 @@ class _DetailsCard extends StatelessWidget {
               text: title,
               fontSize: 14,
               bold: false,
-              color: AppColors.black,
+              color: context.onSurface,
             ),
             const SizedBox(height: 8),
-            AppText(text: value, fontSize: 18, bold: true, color: AppColors.black),
+            AppText(
+              text: value,
+              fontSize: 18,
+              bold: true,
+              color: context.onSurface,
+            ),
           ],
         ),
       ),
     );
   }
 }
-

@@ -72,7 +72,9 @@ class HourlyHoursRow extends StatelessWidget {
               AppText(
                 text: DateTimeHelper.formatTime(timeStr),
                 fontSize: 13,
-                color: isNow ? AppColors.blue : AppColors.grey,
+                color: isNow
+                    ? AppColors.blue
+                    : Theme.of(context).textTheme.bodyMedium!.color,
                 bold: isNow,
               ),
 

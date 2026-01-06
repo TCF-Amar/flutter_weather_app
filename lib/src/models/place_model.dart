@@ -13,7 +13,7 @@ class PlaceModel {
     required this.lon,
   });
 
-  /// 🔍 Name → Lat/Lon (Open-Meteo search)
+  /// Name → Lat/Lon (Open-Meteo search)
   factory PlaceModel.fromSearchJson(Map<String, dynamic> json) {
     final latValue = json['latitude'];
     final lonValue = json['longitude'];
@@ -31,7 +31,7 @@ class PlaceModel {
     );
   }
 
-  /// 📍 Lat/Lon → Place (Reverse geocoding)
+  ///  Lat/Lon → Place (Reverse geocoding)
   factory PlaceModel.fromReverseJson(Map<String, dynamic> json) {
     final address = json['address'] as Map<String, dynamic>?;
 

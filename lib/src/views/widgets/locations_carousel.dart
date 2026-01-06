@@ -17,7 +17,7 @@ class LocationsCarousel extends StatelessWidget {
 
     return Obx(() {
       final savedLocations = controller.savedLocations;
-      final totalCount = 1 + savedLocations.length; // Current + saved
+      final totalCount = 1 + savedLocations.length; 
 
       return SizedBox(
         height: 200,

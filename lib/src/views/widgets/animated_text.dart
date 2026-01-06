@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
-import 'package:weather_app/core/constants/app_colors.dart';
 
 class AnimatedText extends StatelessWidget {
   final String text;
   final double fontSize;
-  final Color color;
+  final Color? color;
   final FontWeight fontWeight;
   final double velocity;
   final double blankSpace;
@@ -18,7 +17,7 @@ class AnimatedText extends StatelessWidget {
     super.key,
     required this.text,
     this.fontSize = 20,
-    this.color = AppColors.black,
+    this.color,
     this.fontWeight = FontWeight.bold,
     this.velocity = 40,
     this.blankSpace = 50,
@@ -42,7 +41,7 @@ class AnimatedText extends StatelessWidget {
           text: TextSpan(text: text, style: textStyle),
           maxLines: 1,
           textDirection: TextDirection.ltr,
-        )..layout(maxWidth: constraints.maxWidth); // ✅ Fixed: added maxWidth
+        )..layout(maxWidth: constraints.maxWidth);
 
         final isOverflowing = textPainter.width < constraints.maxWidth;
 
@@ -55,9 +54,8 @@ class AnimatedText extends StatelessWidget {
           );
         }
 
-        //  Fixed: Wrap Marquee in SizedBox with fixed height
         return SizedBox(
-          height: fontSize * 1.5, // Height based on font size
+          height: fontSize * 1.5, 
           child: Marquee(
             text: text,
             style: textStyle,

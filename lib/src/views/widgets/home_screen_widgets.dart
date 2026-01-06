@@ -18,7 +18,7 @@ class WeatherView extends StatelessWidget {
 
   final PlaceController placeController;
 
-  WeatherView({
+  WeatherView({super.key, 
     required this.locationController,
     required this.weatherController,
     required this.placeController,
@@ -92,7 +92,7 @@ class PermissionView extends StatelessWidget {
   final bool showSettingsButton;
   final VoidCallback? onOpenSettings;
 
-  const PermissionView({
+  const PermissionView({super.key, 
     required this.message,
     required this.onRetry,
     this.showSettingsButton = false,
@@ -149,7 +149,7 @@ class ErrorView extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
 
-  const ErrorView({required this.message, required this.onRetry});
+  const ErrorView({super.key, required this.message, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {

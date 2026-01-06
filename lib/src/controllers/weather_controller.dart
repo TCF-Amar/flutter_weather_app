@@ -25,11 +25,11 @@ class WeatherController extends GetxController {
   void onInit() {
     super.onInit();
 
-    // ✅ Safely find after super.onInit()
+    // Safely find after super.onInit()
     locationController = Get.find<LocationController>();
     placeController = Get.find<PlaceController>();
 
-    // 🔁 Listen to coordinate changes
+    // Listen to coordinate changes
     _locationWorker = everAll(
       [locationController.latitude, locationController.longitude],
       (_) {
@@ -43,7 +43,7 @@ class WeatherController extends GetxController {
       },
     );
 
-    // 🔁 Listen to place changes and update weather model
+    // Listen to place changes and update weather model
     _placeWorker = ever(
       placeController.currentPlace,
       (place) {
@@ -66,7 +66,7 @@ class WeatherController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    // ✅ Load initial weather if location already available
+    //  Load initial weather if location already available
     if (_hasValidLocation) {
       _lastLat = locationController.latitude.value;
       _lastLon = locationController.longitude.value;

@@ -4,8 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/core/DI/initialize_dependency.dart';
 import 'package:weather_app/core/storage/local_storage.dart';
 import 'package:weather_app/core/storage/shared_prefs_storage.dart';
+import 'package:weather_app/core/theme/app_theme.dart';
 import 'package:weather_app/services/routes/app_route.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:weather_app/src/controllers/settings_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,16 +33,19 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Weather App',
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    final SettingsController settingsController = Get.find();
+
+    return Obx(
+      () => GetMaterialApp.router(
+        title: 'Weather App',
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: settingsController.themeMode.value,
+        debugShowCheckedModeBanner: false,
+        routeInformationParser: AppRoute.router.routeInformationParser,
+        routerDelegate: AppRoute.router.routerDelegate,
+        routeInformationProvider: AppRoute.router.routeInformationProvider,
       ),
-      debugShowCheckedModeBanner: false,
-      routeInformationParser: AppRoute.router.routeInformationParser,
-      routerDelegate: AppRoute.router.routerDelegate,
-      routeInformationProvider: AppRoute.router.routeInformationProvider,
     );
   }
 }

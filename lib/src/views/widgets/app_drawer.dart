@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/controllers/place_controller.dart';
 import 'package:weather_app/src/controllers/saved_locations_controller.dart';
@@ -26,11 +27,11 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: AppColors.transparent,
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [AppColors.grigent1, AppColors.grigent2],
+            colors: [context.gradient1, context.gradient2],
           ),
         ),
         child: SafeArea(

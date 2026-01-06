@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/src/controllers/settings_controller.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
@@ -18,25 +19,27 @@ class WindPressureCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// Header
-          const AppText(
+          AppText(
             text: 'Wind',
             fontSize: 20,
             bold: true,
-            color: AppColors.black,
+            color: context.textColor,
           ),
 
-          /// 🔹 Card
+          ///  Card
           Container(
             margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: context.isDark
+                  ? context.onBackground.withOpacity(0.01)
+                  : context.surface,
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.black.withValues(alpha: 0.08),
-                  blurRadius: 16,
-                  offset: const Offset(0, 6),
+                  color: context.shadowColor,
+                  blurRadius: 1,
+                  offset: const Offset(0, 1),
                 ),
               ],
             ),
@@ -65,7 +68,7 @@ class WindPressureCard extends StatelessWidget {
 
                 const SizedBox(height: 24),
 
-                /// 🔹 Content Row
+                ///  Content Row
                 Row(
                   children: [
                     /// 🌬 Wind Icon
@@ -85,7 +88,7 @@ class WindPressureCard extends StatelessWidget {
 
                     const SizedBox(width: 36),
 
-                    /// 📊 Wind & Pressure
+                    ///  Wind & Pressure
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

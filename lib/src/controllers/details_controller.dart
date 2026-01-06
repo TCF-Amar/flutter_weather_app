@@ -6,12 +6,12 @@ import 'package:weather_app/src/models/weather_model.dart';
 /// Controller for the details screen
 /// Manages weather data for a specific location
 class DetailsController extends GetxController {
-  // ─────────── State Variables ───────────
+  //  State Variables   
   final Rx<WeatherModel?> weather = Rx<WeatherModel?>(null);
   final RxBool isLoading = false.obs;
   final RxString error = ''.obs;
 
-  // ─────────── Public Methods ───────────
+  //  Public Methods 
 
   /// Load weather data for a specific place
   Future<void> loadWeather(PlaceModel place) async {

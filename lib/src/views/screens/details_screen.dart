@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/controllers/details_controller.dart';
@@ -116,11 +117,11 @@ class _DetailsScreenState extends State<DetailsScreen>
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.42,
                 padding: const EdgeInsets.only(top: 40),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [AppColors.grigent1, AppColors.grigent2],
+                    colors: [context.gradient1, context.gradient2],
                   ),
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(28),
@@ -230,12 +231,13 @@ class _DetailsScreenState extends State<DetailsScreen>
               child: Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppColors.white,
+                  color: context.background,
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.black.withValues(alpha: 0.1),
-                      blurRadius: 12,
+                      color: context.shadowColor,
+                      offset: const Offset(0, 1),
+                      blurRadius: 1,
                     ),
                   ],
                 ),
@@ -245,10 +247,12 @@ class _DetailsScreenState extends State<DetailsScreen>
                     TabBar(
                       controller: _tabController,
 
-                      labelColor: AppColors.primary,
-                      unselectedLabelColor: AppColors.grey,
-                      indicatorColor: AppColors.primary,
-                      tabs: const [
+                      labelColor: context.onSurface,
+                      unselectedLabelColor: context.onSurface.withValues(
+                        alpha: 0.5,
+                      ),
+                      indicatorColor: context.onSurface,
+                      tabs: [
                         Tab(text: "Yesterday"),
                         Tab(text: "Today"),
                         Tab(text: "Tomorrow"),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/src/controllers/splash_controller.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
@@ -45,10 +46,10 @@ class _SplashScreenState extends State<SplashScreen> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppColors.grigent1,
-                  AppColors.grigent1,
-                  AppColors.grigent1,
-                  AppColors.grigent2,
+                  context.gradient1,
+                  context.gradient1,
+                  context.gradient1,
+                  context.gradient2,
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,

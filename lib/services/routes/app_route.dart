@@ -37,7 +37,6 @@ class AppRoute {
         path: RouteName.search.path,
         name: RouteName.search.name,
         builder: (context, state) {
-          // Controller is already registered in main.dart as permanent
           return SearchScreen(title: state.uri.queryParameters['title']);
         },
       ),

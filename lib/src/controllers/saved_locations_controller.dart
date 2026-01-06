@@ -73,7 +73,6 @@ class SavedLocationsController extends GetxController {
 
       result.fold(
         (failure) {
-          // Handle error silently - could add proper error logging if needed
         },
         (data) {
           savedWeatherData[key] = WeatherModel(

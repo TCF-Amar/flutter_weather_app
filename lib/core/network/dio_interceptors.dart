@@ -13,6 +13,7 @@ class DioInterceptors extends Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     handler.next(response);
   }
+  
 
 
 }

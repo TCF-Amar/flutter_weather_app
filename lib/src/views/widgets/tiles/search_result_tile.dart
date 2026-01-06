@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/controllers/search_controller.dart';
 import 'package:weather_app/src/models/place_model.dart';
 
 class SearchResultTile extends StatelessWidget {
   final PlaceModel place;
+  final VoidCallback? onTap;
 
-  const SearchResultTile({super.key, required this.place});
+  const SearchResultTile({super.key, required this.place, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -19,32 +21,21 @@ class SearchResultTile extends StatelessWidget {
 
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            blurRadius: 2,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: context.onBackground.withOpacity(0.1),
+   
       ),
       child: ListTile(
-        leading: const Icon(
-          Icons.location_on,
-          color: Color.fromARGB(255, 33, 37, 243),
-        ),
-        title: Text(
-          place.name,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
+        leading: Icon(Icons.location_on, color: context.onBackground),
+        title: Text(place.name, style: context.textTheme.titleMedium),
         subtitle: Text(
           place.displayName,
-          style: const TextStyle(fontSize: 12),
+          style: context.textTheme.bodyMedium,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        trailing: const Icon(Icons.chevron_right),
+        trailing: Icon(Icons.chevron_right, color: context.onBackground),
         onTap: () {
+          onTap?.call();
           // Save to recent searches
           searchController.addRecentSearch(place);
           // Navigate to detail screen where weather will be loaded

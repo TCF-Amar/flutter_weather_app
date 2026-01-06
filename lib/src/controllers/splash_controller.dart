@@ -6,10 +6,10 @@ import 'package:weather_app/src/controllers/location_controller.dart';
 /// Controller for the splash screen
 /// Handles app initialization and navigation to home screen
 class SplashController extends GetxController {
-  // ─────────── Dependencies ───────────
+  // Dependencies 
   final locationController = Get.find<LocationController>();
 
-  // ─────────── State Variables ───────────
+  // State Variables 
   final RxBool isInitialized = false.obs;
   final RxString statusMessage = 'Loading...'.obs;
 
@@ -19,7 +19,7 @@ class SplashController extends GetxController {
   /// Timer for initialization
   Timer? _timer;
 
-  // ─────────── Lifecycle ───────────
+  // Lifecycle 
 
   @override
   void onInit() {
@@ -33,7 +33,7 @@ class SplashController extends GetxController {
     super.onClose();
   }
 
-  // ─────────── Private Methods ───────────
+  // Private Methods 
 
   /// Initialize the app and wait for location services
   Future<void> _initializeApp() async {

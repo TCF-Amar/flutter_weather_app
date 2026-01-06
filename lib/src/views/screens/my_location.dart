@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/controllers/settings_controller.dart';
 import 'package:weather_app/src/controllers/weather_controller.dart';
@@ -46,9 +47,9 @@ class MyLocationsScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    gradient: const LinearGradient(
+                    gradient: LinearGradient(
                       begin: Alignment.centerLeft,
-                      colors: [AppColors.grigent1, AppColors.grigent2],
+                      colors: [context.gradient1, context.gradient2],
                     ),
                   ),
                   child: Row(

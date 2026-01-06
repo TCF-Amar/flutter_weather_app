@@ -3,6 +3,7 @@ import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 
 class ForecastList extends StatelessWidget {
   final dynamic daily;
@@ -28,11 +29,7 @@ class ForecastList extends StatelessWidget {
             margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
             child: Column(
               children: [
-                // AppText(
-                //   text: DateTimeHelper.isToday(date)
-                //       ? "Today"
-                //       : DateTimeHelper.formatShortDate(date),
-                // ),
+              
                 DateTimeHelper.isToday(date)
                     ? AppText(
                         text: DateTimeHelper.formatShortDate(date),
@@ -41,7 +38,7 @@ class ForecastList extends StatelessWidget {
                       )
                     : AppText(
                         text: DateTimeHelper.formatShortDate(date),
-                        color: AppColors.black,
+                        color: context.onSurface,
                       ),
                 const SizedBox(height: 8),
                 Icon(

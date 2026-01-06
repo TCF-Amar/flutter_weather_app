@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:weather_app/src/views/widgets/animated_text.dart';
-import 'package:weather_app/core/constants/app_colors.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget body;
@@ -52,9 +51,9 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: customAppBar ?? (showAppBar ? _buildAppBar(context) : null),
-      body: body,
+      body: SafeArea(child: body),
       floatingActionButton: floatingActionButton,
       bottomNavigationBar: bottomNavigationBar,
       drawer: drawer,
@@ -64,23 +63,16 @@ class AppScaffold extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       elevation: 0,
       surfaceTintColor: Colors.transparent,
       titleSpacing: 0,
 
-      // systemOverlayStyle: SystemUiOverlayStyle(
-      //   statusBarColor: Colors.transparent,
-      //   statusBarIconBrightness: Brightness.light,
-      // ),
       scrolledUnderElevation: 0,
       centerTitle: centerTitle,
       leading: showBackButton
           ? IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_new,
-                color: AppColors.textPrimary,
-              ),
+              icon: const Icon(Icons.arrow_back_ios_new),
               onPressed:
                   onBackPressed ??
                   () {
@@ -91,15 +83,12 @@ class AppScaffold extends StatelessWidget {
             )
           : isDrawerOpen
           ? IconButton(
-              icon: const Icon(Icons.close, color: AppColors.textPrimary),
+              icon: const Icon(Icons.close),
               onPressed: () {
                 onMenuTab!();
               },
             )
-          : IconButton(
-              icon: const Icon(Icons.menu, color: AppColors.textPrimary),
-              onPressed: onMenuTab,
-            ),
+          : IconButton(icon: const Icon(Icons.menu), onPressed: onMenuTab),
       title: _buildTitle(),
       actions: actions,
     );
@@ -120,7 +109,7 @@ class AppScaffold extends StatelessWidget {
       return AnimatedText(
         text: title!,
         fontSize: titleFontSize,
-        color: titleColor ?? AppColors.textLight,
+        color: titleColor,
         fontWeight: FontWeight.bold,
       );
     }

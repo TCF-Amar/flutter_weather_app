@@ -29,7 +29,7 @@ class CurrentWeather extends Equatable {
     required this.precipitation,
   });
 
-  /// 🔹 API → Model
+  ///  API → Model
   factory CurrentWeather.fromJson(Map<String, dynamic> json) {
     return CurrentWeather(
       time: DateTime.parse(json['time']),
@@ -47,7 +47,7 @@ class CurrentWeather extends Equatable {
     );
   }
 
-  /// 🔹 Model → JSON (cache / storage ke liye)
+  ///  Model → JSON (cache / storage ke liye)
   Map<String, dynamic> toJson() {
     return {
       'time': time.toIso8601String(),
@@ -65,7 +65,7 @@ class CurrentWeather extends Equatable {
     };
   }
 
-  /// 🔹 Immutable update (recommended)
+  /// Immutable update (recommended)
   CurrentWeather copyWith({
     DateTime? time,
     bool? isDay,
@@ -96,7 +96,7 @@ class CurrentWeather extends Equatable {
     );
   }
 
-  /// 🔹 Equatable (state comparison)
+  ///  Equatable (state comparison)
   @override
   List<Object?> get props => [
     time,

@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:weather_app/core/errors/dio_failure_mapper.dart';
 import 'package:weather_app/core/errors/failure.dart';
-import 'package:weather_app/core/network/dio_client.dart';
+import 'package:weather_app/core/network/api_helper.dart';
 import 'package:weather_app/src/models/place_model.dart';
 
 class LatLonToPlace {
@@ -11,8 +11,9 @@ class LatLonToPlace {
     double lon,
   ) async {
     try {
-      final response = await DioClient.latLonToPlaceDio.get(
-        '/reverse',
+      final response = await ApiHelper.latLonToPlaceApiRequest(
+        url: '/reverse',
+        method: ApiMethod.GET,
         queryParameters: {'format': 'json', 'lat': lat, 'lon': lon},
       );
 

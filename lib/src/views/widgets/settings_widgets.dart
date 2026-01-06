@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 
 class SettingsSectionHeader extends StatelessWidget {
@@ -14,7 +15,7 @@ class SettingsSectionHeader extends StatelessWidget {
         text: title.toUpperCase(),
         fontSize: 13,
         bold: true,
-        color: AppColors.grey,
+        color: context.labelMedium?.color,
       ),
     );
   }
@@ -28,11 +29,11 @@ class SettingsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color: context.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppColors.black.withValues(alpha: 0.03),
+            color: context.onSurface.withValues(alpha: 0.03),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -80,67 +81,68 @@ class SettingsToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedIndex = options.indexWhere((element) => element.isSelected);
+
     return ListTile(
-      title: AppText(text: title, fontSize: 16, bold: false),
+      title: AppText(text: title, fontSize: 16),
       trailing: SizedBox(
         width: 160,
         height: 40,
         child: Container(
+          padding: const EdgeInsets.all(3),
           decoration: BoxDecoration(
-            color: AppColors.blue.withValues(alpha: 0.2),
+            color: context.onSurface.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(100),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.white.withValues(alpha: 0.5),
-                blurRadius: 1,
-                offset: const Offset(0, 0),
-                spreadRadius: 1,
-                blurStyle: BlurStyle.inner,
+          ),
+          child: Stack(
+            children: [
+              ///  Sliding Indicator
+              AnimatedAlign(
+                duration: const Duration(milliseconds: 280),
+                curve: Curves.easeOutCubic,
+                alignment: selectedIndex == 0
+                    ? Alignment.centerLeft
+                    : Alignment.centerRight,
+                child: Container(
+                  width: 74,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [context.gradient1, context.gradient2],
+                    ),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+              ),
+
+              /// Buttons
+              Row(
+                children: options.map((option) {
+                  return Expanded(
+                    child: GestureDetector(
+                      onTap: option.onTap,
+                      behavior: HitTestBehavior.opaque,
+                      child: Center(
+                        child: AnimatedDefaultTextStyle(
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.easeOut,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: option.isSelected
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            color: option.isSelected
+                                ? AppColors.white
+                                : context.onSurface,
+                          ),
+                          child: Text(option.label),
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
             ],
-          ),
-          child: Row(
-            children: options
-                .map((option) => _buildToggleOption(option))
-                .toList(),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildToggleOption(ToggleOption option) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: option.onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          decoration: BoxDecoration(
-            gradient: option.isSelected
-                ? const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [AppColors.grigent1, AppColors.grigent2],
-                  )
-                : null,
-            borderRadius: BorderRadius.circular(100),
-            boxShadow: option.isSelected
-                ? [
-                    BoxShadow(
-                      color: AppColors.white.withValues(alpha: 0.2),
-                      blurRadius: 4,
-                      offset: const Offset(0, 2),
-                    ),
-                  ]
-                : [],
-          ),
-          child: Center(
-            child: AppText(
-              text: option.label,
-              fontSize: 14,
-              bold: option.isSelected,
-              color: option.isSelected ? AppColors.white : AppColors.black,
-            ),
           ),
         ),
       ),

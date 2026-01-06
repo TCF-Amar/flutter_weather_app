@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/src/models/weather_model.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 import 'package:weather_app/src/views/widgets/lists/weekly_list.dart';
@@ -39,11 +40,11 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
         margin: const EdgeInsets.only(top: 20),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: context.surface,
           borderRadius: BorderRadius.circular(28),
           boxShadow: [
             BoxShadow(
-              color: AppColors.black.withValues(alpha: 0.06),
+              color: context.shadowColor,
               blurRadius: 20,
               offset: const Offset(0, 8),
             ),
@@ -80,14 +81,14 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
           const AppText(text: 'Weekly Forecast', fontSize: 20, bold: true),
           const SizedBox(height: 12),
 
-          /// 🔹 Card
+          ///  Card
           Container(
             decoration: BoxDecoration(
-              color: AppColors.white,
+              color: context.surface,
               borderRadius: BorderRadius.circular(28),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.black.withValues(alpha: 0.06),
+                  color: context.shadowColor,
                   blurRadius: 20,
                   offset: const Offset(0, 8),
                 ),
@@ -97,7 +98,7 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
               children: [
                 const SizedBox(height: 8),
 
-                /// 🔹 Tabs (pill style)
+                ///  Tabs (pill style)
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
@@ -124,7 +125,7 @@ class _WeeklyForecastCardState extends State<WeeklyForecastCard>
 
                 const SizedBox(height: 12),
 
-                /// 🔹 Content
+                ///  Content
                 SizedBox(
                   height: 550,
                   child: TabBarView(

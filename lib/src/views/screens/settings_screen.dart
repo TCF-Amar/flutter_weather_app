@@ -70,6 +70,37 @@ class SettingsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                Obx(
+                  () => SettingsToggle(
+                    title: "Theme",
+                    options: [
+                      ToggleOption(
+                        label: "Light",
+                        isSelected:
+                            settingsController.themeMode.value ==
+                            ThemeMode.light,
+                        onTap: () =>
+                            settingsController.setThemeMode(ThemeMode.light),
+                      ),
+                      ToggleOption(
+                        label: "Dark",
+                        isSelected:
+                            settingsController.themeMode.value ==
+                            ThemeMode.dark,
+                        onTap: () =>
+                            settingsController.setThemeMode(ThemeMode.dark),
+                      ),
+                      // ToggleOption(
+                      //   label: "System",
+                      //   isSelected:
+                      //       settingsController.themeMode.value ==
+                      //       ThemeMode.system,
+                      //   onTap: () =>
+                      //       settingsController.setThemeMode(ThemeMode.system),
+                      // ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -116,16 +147,6 @@ class SettingsScreen extends StatelessWidget {
                   title: "Version",
                   trailing: AppText(text: "1.0.0", fontSize: 14),
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-          const SettingsSectionHeader(title: "Account"),
-          const SizedBox(height: 12),
-          SettingsCard(
-            child: Column(
-              children: [
-                SettingsItem(icon: Icons.logout, title: "Logout", onTap: () {}),
               ],
             ),
           ),
