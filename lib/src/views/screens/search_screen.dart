@@ -4,6 +4,7 @@ import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/src/controllers/search_controller.dart';
 import 'package:weather_app/src/views/widgets/app_scaffold.dart';
+import 'package:weather_app/src/views/widgets/app_text.dart';
 import 'package:weather_app/src/views/widgets/tiles/search_result_tile.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -16,93 +17,101 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      title: title,
+    return PopScope(
+      canPop: true,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) {
+          // Clear search query when navigating back
+          queryController.clear();
+          controller.currentQuery = '';
+        }
+      },
+      child: AppScaffold(
+        title: title,
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              ///  Search Field
+              Container(
+                decoration: BoxDecoration(
+                  color: context.onBackground.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Obx(
+                  () => TextFormField(
+                    controller: queryController,
+                    style: TextStyle(fontSize: 16, color: context.onBackground),
 
-      // titleColor: AppColors.textPrimary,
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            ///  Search Field
-            Container(
-              decoration: BoxDecoration(
-                color: context.onBackground.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Obx(
-                () => TextFormField(
-                  controller: queryController,
-                  style: TextStyle(fontSize: 16, color: context.onBackground),
+                    decoration: InputDecoration(
+                      /// border transparent
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      // enabledBorder: Br,
 
-                  decoration: InputDecoration(
-                    /// border transparent
-                    border: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    // enabledBorder: Br,
+                      // labelText: 'Search',
+                      hintText: 'Search city name',
+                      prefixIcon: const Icon(Icons.search),
 
-                    // labelText: 'Search',
-                    hintText: 'Search city name',
-                    prefixIcon: const Icon(Icons.search),
-
-                    suffixIcon: controller.currentQuery.isNotEmpty
-                        ? IconButton(
-                            icon: Icon(
-                              Icons.clear,
-                              color: context.onBackground,
-                            ),
-                            onPressed: () {
-                              queryController.clear();
-                              controller.currentQuery = '';
-                            },
-                          )
-                        : null,
+                      suffixIcon: controller.currentQuery.isNotEmpty
+                          ? IconButton(
+                              icon: Icon(
+                                Icons.clear,
+                                color: context.onBackground,
+                              ),
+                              onPressed: () {
+                                queryController.clear();
+                                controller.currentQuery = '';
+                              },
+                            )
+                          : null,
+                    ),
+                    onChanged: (value) {
+                      controller.currentQuery = value;
+                    },
                   ),
-                  onChanged: (value) {
-                    controller.currentQuery = value;
-                  },
                 ),
               ),
-            ),
 
-            const SizedBox(height: 16),
+              const SizedBox(height: 16),
 
-            Expanded(
-              child: Obx(() {
-                if (controller.isLoading.value) {
-                  return const Center(child: CircularProgressIndicator());
-                }
+              Expanded(
+                child: Obx(() {
+                  if (controller.isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
 
-                if (controller.currentQuery.isEmpty) {
-                  return _buildRecentSearches();
-                }
+                  if (controller.currentQuery.isEmpty) {
+                    return _buildRecentSearches(context);
+                  }
 
-                if (controller.places.isEmpty) {
-                  return const Center(child: Text('No results found'));
-                }
+                  if (controller.places.isEmpty) {
+                    return const Center(child: Text('No results found'));
+                  }
 
-                return ListView.builder(
-                  itemCount: controller.places.length,
-                  itemBuilder: (context, index) {
-                    final place = controller.places[index];
-                    return SearchResultTile(
-                      place: place,
-                      onTap: () {
-                        controller.currentQuery = '';
-                        queryController.clear();
-                      },
-                    );
-                  },
-                );
-              }),
-            ),
-          ],
+                  return ListView.builder(
+                    itemCount: controller.places.length,
+                    itemBuilder: (context, index) {
+                      final place = controller.places[index];
+                      return SearchResultTile(
+                        place: place,
+                        onTap: () {
+                          controller.currentQuery = '';
+                          queryController.clear();
+                        },
+                      );
+                    },
+                  );
+                }),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildRecentSearches() {
+  Widget _buildRecentSearches(BuildContext context) {
     return Obx(() {
       if (controller.recentSearches.isEmpty) {
         return const Center(
@@ -134,7 +143,7 @@ class SearchScreen extends StatelessWidget {
                 onPressed: () {
                   controller.clearRecentSearches();
                 },
-                child: const Text('Clear All'),
+                child: AppText(text: 'Clear All', color: context.onBackground),
               ),
             ],
           ),
