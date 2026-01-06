@@ -15,6 +15,7 @@ import 'package:weather_app/src/views/widgets/app_text.dart';
 import 'package:weather_app/src/views/widgets/details_section.dart';
 import 'package:weather_app/src/views/widgets/lists/hourly_hours_row.dart';
 import 'package:weather_app/src/views/widgets/share_options_sheet.dart';
+import 'package:weather_app/src/views/widgets/skeletons/details_skeleton.dart';
 
 class DetailsScreen extends StatefulWidget {
   final PlaceModel place;
@@ -72,10 +73,7 @@ class _DetailsScreenState extends State<DetailsScreen>
       final errorValue = detailsController.error.value;
 
       if (isLoadingValue || weatherValue == null) {
-        return AppScaffold(
-          title: 'Loading',
-          body: const Center(child: CircularProgressIndicator()),
-        );
+        return const DetailsSkeleton();
       }
 
       if (errorValue.isNotEmpty) {

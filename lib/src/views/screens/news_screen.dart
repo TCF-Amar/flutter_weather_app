@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/src/models/news_model.dart';
@@ -87,16 +88,30 @@ class NewsScreen extends StatelessWidget {
                           color: AppColors.grey,
                         ),
                         const SizedBox(width: 10),
-                        Row(
-                          children: [
-                            Icon(Icons.share, size: 20, color: AppColors.grey),
-                            const SizedBox(width: 10),
-                            AppText(
-                              text: "Share it",
-                              fontSize: 16,
-                              color: AppColors.grey,
-                            ),
-                          ],
+                        InkWell(
+                          onTap: () {
+                            final newsData =
+                                "${news.title}\n\n${news.description}\n\n${news.imageUrl}\n\n${news.imageUrl}";
+
+                            SharePlus.instance.share(
+                              ShareParams(text: newsData),
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.share,
+                                size: 20,
+                                color: AppColors.grey,
+                              ),
+                              const SizedBox(width: 10),
+                              AppText(
+                                text: "Share it",
+                                fontSize: 16,
+                                color: AppColors.grey,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

@@ -112,7 +112,7 @@ class MainCard extends StatelessWidget {
 
                 Obx(
                   () => _infoItem(
-                    'assets/images/icon_wind.svg',
+                    'assets/images/Vector (2).svg',
                     settingsController.formatWindSpeed(
                       weather.current.windSpeed,
                     ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:weather_app/core/utils/date_utils.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
+import 'package:weather_app/src/controllers/settings_controller.dart';
 import 'package:weather_app/src/views/widgets/app_text.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
 import 'package:weather_app/core/theme/theme_extensions.dart';
@@ -9,8 +11,8 @@ class ForecastList extends StatelessWidget {
   final dynamic daily;
   final List<int> indexes;
 
-  const ForecastList({super.key, required this.daily, required this.indexes});
-
+  ForecastList({super.key, required this.daily, required this.indexes});
+  final SettingsController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +31,6 @@ class ForecastList extends StatelessWidget {
             margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
             child: Column(
               children: [
-              
                 DateTimeHelper.isToday(date)
                     ? AppText(
                         text: DateTimeHelper.formatShortDate(date),
@@ -51,9 +52,16 @@ class ForecastList extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        AppText(text: "$maxTemp°", fontSize: 14, bold: true),
-                        AppText(text: "/", fontSize: 14, bold: true),
-                        AppText(text: "$minTemp°", fontSize: 14),
+                        AppText(
+                          text: " ${controller.formatTemperature(maxTemp)}",
+                          fontSize: 14,
+                          bold: true,
+                        ),
+                        AppText(text: " /", fontSize: 12, bold: true),
+                        AppText(
+                          text: " ${controller.formatTemperature(minTemp)}",
+                          fontSize: 10,
+                        ),
                       ],
                     ),
                     const SizedBox(height: 8),

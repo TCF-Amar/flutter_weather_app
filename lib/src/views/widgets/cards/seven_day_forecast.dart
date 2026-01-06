@@ -110,7 +110,7 @@ class SevenDayForecast extends StatelessWidget {
     );
   }
 
-  /// 🔹 Empty UI
+  /// Empty UI
   Widget _emptyState(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 20),
