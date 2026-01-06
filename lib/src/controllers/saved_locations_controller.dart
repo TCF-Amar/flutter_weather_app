@@ -16,7 +16,7 @@ class SavedLocationsController extends GetxController {
   final RxMap<String, WeatherModel> savedWeatherData =
       <String, WeatherModel>{}.obs;
   final RxSet<String> loadingWeather = <String>{}.obs;
-
+ 
   @override
   void onInit() {
     super.onInit();

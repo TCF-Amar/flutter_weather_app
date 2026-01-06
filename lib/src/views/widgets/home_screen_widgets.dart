@@ -5,6 +5,7 @@ import 'package:weather_app/src/controllers/location_controller.dart';
 import 'package:weather_app/src/controllers/place_controller.dart';
 import 'package:weather_app/src/controllers/weather_controller.dart';
 import 'package:weather_app/src/models/news_model.dart';
+import 'package:weather_app/src/views/test_notification_button.dart';
 import 'package:weather_app/src/views/widgets/cards/hourly_card.dart';
 import 'package:weather_app/src/views/widgets/cards/news_container.dart';
 import 'package:weather_app/src/views/widgets/cards/seven_day_forecast.dart';
@@ -18,7 +19,8 @@ class WeatherView extends StatelessWidget {
 
   final PlaceController placeController;
 
-  WeatherView({super.key, 
+  WeatherView({
+    super.key,
     required this.locationController,
     required this.weatherController,
     required this.placeController,
@@ -73,6 +75,7 @@ class WeatherView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             LocationsCarousel(currentWeather: weather),
+            TestNotificationButton(),
             HourlyForecastCard(weather: weather),
             // WeeklyForecastCard(weather: weather),
             SevenDayForecast(weather: weather),
@@ -92,7 +95,8 @@ class PermissionView extends StatelessWidget {
   final bool showSettingsButton;
   final VoidCallback? onOpenSettings;
 
-  const PermissionView({super.key, 
+  const PermissionView({
+    super.key,
     required this.message,
     required this.onRetry,
     this.showSettingsButton = false,
@@ -157,6 +161,8 @@ class ErrorView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             const Icon(Icons.error_outline, size: 64, color: AppColors.error),
