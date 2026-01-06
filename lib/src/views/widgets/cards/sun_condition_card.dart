@@ -51,6 +51,32 @@ class SunConditionCard extends StatelessWidget {
     return passedMinutes / totalMinutes;
   }
 
+  /// Calculate moon progress (0.0 = sunset, 1.0 = next sunrise)
+  double _getMoonProgress(String sunset, String nextSunrise) {
+    final now = DateTime.now();
+    final set = DateTime.parse(sunset);
+    final nextRise = DateTime.parse(nextSunrise);
+
+    // Before sunset - position at left (0.0)
+    if (now.isBefore(set)) {
+      return 0.0;
+    }
+
+    // After next sunrise - position at right (1.0)
+    if (now.isAfter(nextRise)) {
+      return 1.0;
+    }
+
+    // During night - calculate progress
+    final totalMinutes = nextRise.difference(set).inMinutes;
+    if (totalMinutes <= 0) {
+      return 0.5; // Default to middle if invalid
+    }
+
+    final passedMinutes = now.difference(set).inMinutes;
+    return passedMinutes / totalMinutes;
+  }
+
   @override
   Widget build(BuildContext context) {
     final daily = weather.daily;
@@ -61,6 +87,12 @@ class SunConditionCard extends StatelessWidget {
     final sunset = daily.sunset[todayIndex];
     final uvIndex = daily.uvIndex[todayIndex];
 
+    // Get tomorrow's sunrise for moon path
+    final tomorrowIndex = todayIndex + 1;
+    final nextSunrise = tomorrowIndex < daily.sunrise.length
+        ? daily.sunrise[tomorrowIndex]
+        : daily.sunrise[todayIndex]; // Fallback to today's if not available
+
     return Container(
       margin: EdgeInsets.only(top: 20),
       child: Column(
@@ -68,7 +100,7 @@ class SunConditionCard extends StatelessWidget {
         children: [
           /// HEADER
           AppText(
-            text: 'Sun condition',
+            text: '${weather.current.isDay ? 'Sun' : 'Moon'} condition',
             fontSize: 20,
             bold: true,
             color: context.textColor,
@@ -105,7 +137,11 @@ class SunConditionCard extends StatelessWidget {
                           color: AppColors.grey,
                         ),
                         SizedBox(height: 4),
-                        AppText(text: 'Sun', fontSize: 16, bold: true),
+                        AppText(
+                          text: weather.current.isDay ? 'Day' : 'Night',
+                          fontSize: 16,
+                          bold: true,
+                        ),
                       ],
                     ),
 
@@ -132,26 +168,71 @@ class SunConditionCard extends StatelessWidget {
 
                 ///  Sun path
                 SizedBox(
-                  height: 30,
+                  height: 40,
                   child: LayoutBuilder(
                     builder: (context, constraints) {
                       final sunProgress = _getSunProgress(sunrise, sunset);
                       const sunIconSize = 22.0;
                       const sunIconHalfSize = sunIconSize / 2;
 
-                      // Calculate sun position from left (0.0) to right (1.0)
                       final maxWidth = constraints.maxWidth;
                       final sunCenterX = sunProgress * maxWidth;
 
-                      // Clamp to keep icon within bounds
                       final clampedX = sunCenterX.clamp(
+                        sunIconHalfSize,
+                        maxWidth - sunIconHalfSize,
+                      );
+
+                      if (weather.current.isDay) {
+                        return Stack(
+                          children: [
+                            // Base line
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: Container(
+                                height: 2,
+                                color: AppColors.indigo,
+                              ),
+                            ),
+                            // Sun icon - positioned dynamically
+                            Positioned(
+                              left: clampedX - sunIconHalfSize,
+                              bottom: 15,
+                              child: const Icon(
+                                Icons.wb_sunny_outlined,
+                                color: AppColors.orange,
+                                size: sunIconSize,
+                              ),
+                            ),
+                            Positioned(
+                              left: clampedX - sunIconHalfSize - 10,
+                              bottom: -16,
+                              child: Icon(
+                                Icons.arrow_drop_up_outlined,
+                                color: AppColors.indigo,
+                                size: 42,
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+
+                      // Nighttime - show moon path
+                      final moonProgress = _getMoonProgress(
+                        sunset,
+                        nextSunrise,
+                      );
+                      final moonCenterX = moonProgress * maxWidth;
+                      final clampedMoonX = moonCenterX.clamp(
                         sunIconHalfSize,
                         maxWidth - sunIconHalfSize,
                       );
 
                       return Stack(
                         children: [
-                          // Base line
+                          // Base line for moon path
                           Positioned(
                             bottom: 0,
                             left: 0,
@@ -161,14 +242,23 @@ class SunConditionCard extends StatelessWidget {
                               color: AppColors.indigo,
                             ),
                           ),
-                          // Sun icon - positioned dynamically
+                          // Moon icon - positioned dynamically
                           Positioned(
-                            left: clampedX - sunIconHalfSize,
-                            bottom: 2,
-                            child: const Icon(
-                              Icons.wb_sunny_outlined,
-                              color: AppColors.orange,
+                            left: clampedMoonX - sunIconHalfSize,
+                            bottom: 15,
+                            child: Icon(
+                              Icons.nights_stay,
+                              color: context.textColor,
                               size: sunIconSize,
+                            ),
+                          ),
+                          Positioned(
+                            left: clampedMoonX - sunIconHalfSize - 10,
+                            bottom: -16,
+                            child: Icon(
+                              Icons.arrow_drop_up_outlined,
+                              color: AppColors.indigo,
+                              size: 42,
                             ),
                           ),
                         ],
@@ -179,17 +269,21 @@ class SunConditionCard extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                ///  Sunrise / Sunset
+                ///  Sunrise / Sunset or Sunset / Next Sunrise
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AppText(
-                      text: DateTimeHelper.formatTime(sunrise),
+                      text: DateTimeHelper.formatTime(
+                        weather.current.isDay ? sunrise : sunset,
+                      ),
                       fontSize: 12,
                       color: AppColors.grey,
                     ),
                     AppText(
-                      text: DateTimeHelper.formatTime(sunset),
+                      text: DateTimeHelper.formatTime(
+                        weather.current.isDay ? sunset : nextSunrise,
+                      ),
                       fontSize: 12,
                       color: AppColors.grey,
                     ),

@@ -62,7 +62,7 @@ class _DetailsScreenState extends State<DetailsScreen>
     );
   }
 
-  /// 🔹 Get 24 hourly indexes for a specific day
+  /// Get 24 hourly indexes for a specific day
 
   @override
   Widget build(BuildContext context) {
@@ -196,6 +196,7 @@ class _DetailsScreenState extends State<DetailsScreen>
                     Icon(
                       WeatherIconMapper.getIcon(
                         weatherValue.current.weatherCode,
+                        isDay: weatherValue.current.isDay,
                       ),
                       size: 70,
                       color: AppColors.white,

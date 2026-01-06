@@ -29,7 +29,7 @@ class MainCard extends StatelessWidget {
         context.pushNamed(RouteName.details.name, extra: weather.place);
       },
       child: Container(
-        height: 200,
+        // height: 200,
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -39,6 +39,7 @@ class MainCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ///  Top Row
@@ -64,7 +65,10 @@ class MainCard extends StatelessWidget {
                   ],
                 ),
                 Icon(
-                  WeatherIconMapper.getIcon(weather.current.weatherCode),
+                  WeatherIconMapper.getIcon(
+                    weather.current.weatherCode,
+                    isDay: weather.current.isDay,
+                  ),
                   size: 90,
                   color: AppColors.white,
                 ),
@@ -73,7 +77,7 @@ class MainCard extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            ///  Location 
+            ///  Location
             Row(
               children: [
                 const Icon(Icons.location_on, color: AppColors.white),
@@ -91,7 +95,7 @@ class MainCard extends StatelessWidget {
 
             const Spacer(),
 
-            ///  Bottom Info 
+            ///  Bottom Info
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -127,7 +131,7 @@ class MainCard extends StatelessWidget {
     );
   }
 
-  ///  Reusable Info Item 
+  ///  Reusable Info Item
   Widget _infoItem(String asset, String text) {
     return Row(
       children: [

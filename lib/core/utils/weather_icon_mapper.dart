@@ -4,11 +4,9 @@ class WeatherIconMapper {
   static IconData getIcon(int code, {bool isDay = true}) {
     switch (code) {
       case 0:
-        return isDay ? Icons.wb_sunny : Icons.nightlight_round;
-
       case 1:
       case 2:
-        return isDay ? Icons.sunny : Icons.cloud;
+        return isDay ? Icons.sunny : Icons.nights_stay;
 
       case 3:
         return Icons.cloud;
