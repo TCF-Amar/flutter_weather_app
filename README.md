@@ -1,8 +1,8 @@
-# Weather App 🌤️
+# Weather App
 
 A modern, feature-rich Flutter weather application that provides real-time weather information with a beautiful, intuitive interface.
 
-## Features ✨
+## Features
 
 ### Core Functionality
 
@@ -32,7 +32,7 @@ A modern, feature-rich Flutter weather application that provides real-time weath
 - **Offline Support** - Cached weather data
 - **Recent Searches** - Quick access to previously searched locations
 
-## Tech Stack 🛠️
+## Tech Stack 
 
 ### Framework & Language
 
@@ -61,16 +61,24 @@ A modern, feature-rich Flutter weather application that provides real-time weath
 - `dartz` - Functional programming utilities
 - `equatable` - Value equality
 
-## Project Structure 📁
+## Project Structure
 
 ```
 lib/
 ├── core/
 │   ├── storage/          # Local storage utilities
 │   └── utils/            # Helper functions & utilities
+│   └── theme/            # Theme configuration
+│   └── constants/        # Constants
+│   └── config/           # Configuration
+│   └── DI/               # Dependency Injection
+│   └── error/            # Error handling
+│   └── storage/          # Local storage utilities
+│   └── utils/            # Helper functions & utilities
 ├── services/
 │   ├── api/              # API service layer
 │   └── routes/           # App routing configuration
+|   └── notification/     # Notification service
 └── src/
     ├── controllers/      # GetX controllers
     ├── models/           # Data models
@@ -82,7 +90,7 @@ lib/
             └── tiles/    # List item tiles
 ```
 
-## Getting Started 🚀
+## Getting Started 
 
 ### Prerequisites
 
@@ -133,7 +141,7 @@ lib/
 - Minimum iOS version: 12.0
 - Location permissions configured in `Info.plist`
 
-## API Integration 🌐
+## API Integration 
 
 This app uses the **Open-Meteo API** - a free, open-source weather API that doesn't require registration.
 
@@ -142,7 +150,7 @@ This app uses the **Open-Meteo API** - a free, open-source weather API that does
 - Weather Forecast API
 - Geocoding API (for location search)
 
-## Configuration ⚙️
+## Configuration
 
 ### Changing Units
 
@@ -153,9 +161,12 @@ Users can customize units in the Settings screen:
 
 ### Theme
 
-The app automatically adapts to system theme preferences.
+The application features a dynamic theme system:
 
-## Development 👨‍💻
+- **Light/Dark Mode**: Users can toggle between light and dark themes manually.
+- **Persistence**: User theme preference is saved locally via `shared_preferences`.
+
+## Development
 
 ### Code Organization
 
@@ -173,7 +184,7 @@ The app automatically adapts to system theme preferences.
 - `SettingsController` - User preferences
 - `SearchController` - Location search functionality
 
-## Testing 🧪
+## Testing
 
 ```bash
 # Run all tests
@@ -183,7 +194,7 @@ flutter test
 flutter test --coverage
 ```
 
-## Building for Production 📦
+## Building for Production
 
 ### Android
 
@@ -199,7 +210,7 @@ flutter build appbundle --release
 flutter build ios --release
 ```
 
-## Contributing 🤝
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -209,22 +220,10 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License 📄
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Acknowledgments 🙏
 
 - Weather data provided by [Open-Meteo](https://open-meteo.com/)
 - Icons and design inspiration from modern weather apps
 - Flutter community for excellent packages and support
 
-## Contact 📧
-
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
-
-Project Link: [https://github.com/yourusername/weather_app](https://github.com/yourusername/weather_app)
-
----
-
-Made with ❤️ using Flutter
+Made with using Flutter
