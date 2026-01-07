@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/services/routes/route_name.dart';
 import 'package:weather_app/src/controllers/location_controller.dart';
 import 'package:weather_app/src/controllers/place_controller.dart';
@@ -32,7 +33,6 @@ class HomeScreen extends StatelessWidget {
           text: weather?.place?.name.split(',')[1] ?? 'Weather',
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          
         );
       }),
 
@@ -57,7 +57,9 @@ class HomeScreen extends StatelessWidget {
         child: Obx(() {
           switch (locationController.status.value) {
             case LocationStatus.loading:
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                child: CircularProgressIndicator(color: context.surface),
+              );
 
             case LocationStatus.denied:
               return PermissionView(

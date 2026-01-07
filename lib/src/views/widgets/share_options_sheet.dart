@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:weather_app/core/constants/app_colors.dart';
+import 'package:weather_app/core/theme/theme_extensions.dart';
 import 'package:weather_app/core/utils/weather_icon_mapper.dart';
 import 'package:weather_app/src/models/place_model.dart';
 import 'package:weather_app/src/models/weather_model.dart';
@@ -34,7 +35,7 @@ class ShareOptionsSheet extends StatelessWidget {
 
       Shared from Weather App
       ''';
-  } 
+  }
 
   /// Share via native share sheet
   void _shareViaApps(BuildContext context) {
@@ -64,9 +65,9 @@ class ShareOptionsSheet extends StatelessWidget {
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.all(24),
-        decoration: const BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        decoration: BoxDecoration(
+          color: context.surface,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
