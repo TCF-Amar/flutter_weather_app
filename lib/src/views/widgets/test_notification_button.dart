@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/services/notification/notification_service.dart';
-import 'package:weather_app/src/views/widgets/notification_payload.dart';
+import 'package:weather_app/services/routes/route_name.dart';
+import 'package:weather_app/core/notification/notification_payload.dart';
 
 class TestNotificationButton extends StatelessWidget {
   const TestNotificationButton({super.key});
@@ -20,7 +21,7 @@ class TestNotificationButton extends StatelessWidget {
               payload: NotificationPayload(
                 type: 'test',
                 data: 'from_button',
-                route: '/search',
+                route: RouteName.notification.path,
               ),
             );
           },

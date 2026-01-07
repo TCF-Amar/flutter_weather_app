@@ -11,6 +11,7 @@ import 'package:weather_app/src/views/widgets/cards/seven_day_forecast.dart';
 import 'package:weather_app/src/views/widgets/cards/sun_condition_card.dart';
 import 'package:weather_app/src/views/widgets/cards/wind_card.dart';
 import 'package:weather_app/src/views/widgets/locations_carousel.dart';
+import 'package:weather_app/src/views/widgets/test_notification_button.dart';
 
 class WeatherView extends StatelessWidget {
   final LocationController locationController;
@@ -74,7 +75,7 @@ class WeatherView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             LocationsCarousel(currentWeather: weather),
-            // TestNotificationButton(),
+            TestNotificationButton(),
             HourlyForecastCard(weather: weather),
             // WeeklyForecastCard(weather: weather),
             SevenDayForecast(weather: weather),

@@ -4,8 +4,8 @@ import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:weather_app/core/theme/notification_channels.dart';
-import 'package:weather_app/core/utils/notification_healper.dart';
-import 'package:weather_app/src/views/widgets/notification_payload.dart';
+import 'package:weather_app/core/notification/notification_healper.dart';
+import 'package:weather_app/core/notification/notification_payload.dart';
 
 class NotificationService {
   NotificationService._();
@@ -55,6 +55,7 @@ class NotificationService {
       DateTime.now().millisecondsSinceEpoch ~/ 1000,
       title,
       body,
+
       const NotificationDetails(
         android: NotificationChannels.weatherAndroidDetails,
       ),
@@ -62,7 +63,6 @@ class NotificationService {
     );
   }
 
-  
   ///  CANCEL
   Future<void> cancelAll() async => _plugin.cancelAll();
 

@@ -6,6 +6,7 @@ import 'package:weather_app/src/views/screens/details_screen.dart';
 import 'package:weather_app/src/views/screens/home_wrapper.dart';
 import 'package:weather_app/src/views/screens/my_location.dart';
 import 'package:weather_app/src/views/screens/news_screen.dart';
+import 'package:weather_app/src/views/screens/notification_screen.dart';
 import 'package:weather_app/src/views/screens/search_screen.dart';
 import 'package:weather_app/src/views/screens/splash_screen.dart';
 import 'package:weather_app/src/views/screens/settings_screen.dart';
@@ -56,9 +57,15 @@ class AppRoute {
         path: RouteName.myLocations.path,
         name: RouteName.myLocations.name,
         builder: (context, state) {
-
-         return   MyLocationsScreen();
-        }
+          return MyLocationsScreen();
+        },
+      ),
+      GoRoute(
+        path: RouteName.notification.path,
+        name: RouteName.notification.name,
+        builder: (context, state) {
+          return NotificationScreen();
+        },
       ),
     ],
   );
